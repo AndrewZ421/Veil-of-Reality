@@ -18,9 +18,13 @@ class HomePageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // 进行视图的初始化和数据绑定
+        let maincharacter = Character(id: 1, name: "Test man", age: 0, gender: Gender.male, occupation: Occupation.employed, married: false, student: false)
     }
     
     // 主页的其他方法，比如处理用户的选择操作，跳转到功能页等
+    func testConnection(){
+        
+    }
     
     // 用户按了Age Growth后如何向服务器request一个event。
     func ageCharacter(character: Character) {

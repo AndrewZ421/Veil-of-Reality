@@ -9,14 +9,13 @@
 /* Begin PBXBuildFile section */
 		4902F3C02AE384200004CA5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4902F3BF2AE384200004CA5C /* AppDelegate.swift */; };
 		4902F3C22AE384200004CA5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4902F3C12AE384200004CA5C /* SceneDelegate.swift */; };
-		4902F3C42AE384200004CA5C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4902F3C32AE384200004CA5C /* ViewController.swift */; };
 		4902F3C72AE384200004CA5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4902F3C52AE384200004CA5C /* Main.storyboard */; };
 		4902F3C92AE384240004CA5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4902F3C82AE384240004CA5C /* Assets.xcassets */; };
 		4902F3CC2AE384240004CA5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4902F3CA2AE384240004CA5C /* LaunchScreen.storyboard */; };
 		4B790A952AF73A76005A3F30 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B790A942AF73A76005A3F30 /* Event.swift */; };
 		4B790A982AF75195005A3F30 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B790A972AF75195005A3F30 /* NetworkService.swift */; };
 		4B790A9A2AF75F88005A3F30 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B790A992AF75F88005A3F30 /* User.swift */; };
-		4B790A9C2AF76070005A3F30 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B790A9B2AF76070005A3F30 /* HomePageController.swift */; };
+		4B790A9C2AF76070005A3F30 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B790A9B2AF76070005A3F30 /* HomePageViewController.swift */; };
 		4B790A9E2AF760F7005A3F30 /* StartScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B790A9D2AF760F7005A3F30 /* StartScreenController.swift */; };
 		4B790AA02AF763E1005A3F30 /* LifePathPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B790A9F2AF763E1005A3F30 /* LifePathPageController.swift */; };
 		4B790AA22AF76527005A3F30 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B790AA12AF76527005A3F30 /* Character.swift */; };
@@ -27,7 +26,6 @@
 		4902F3BC2AE384200004CA5C /* Veil-of-Reality.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Veil-of-Reality.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4902F3BF2AE384200004CA5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4902F3C12AE384200004CA5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4902F3C32AE384200004CA5C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4902F3C62AE384200004CA5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4902F3C82AE384240004CA5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4902F3CB2AE384240004CA5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -35,7 +33,7 @@
 		4B790A942AF73A76005A3F30 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		4B790A972AF75195005A3F30 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		4B790A992AF75F88005A3F30 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		4B790A9B2AF76070005A3F30 /* HomePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
+		4B790A9B2AF76070005A3F30 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		4B790A9D2AF760F7005A3F30 /* StartScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenController.swift; sourceTree = "<group>"; };
 		4B790A9F2AF763E1005A3F30 /* LifePathPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifePathPageController.swift; sourceTree = "<group>"; };
 		4B790AA12AF76527005A3F30 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
@@ -78,7 +76,6 @@
 				4B6B8D292AF073FA0030A548 /* Models */,
 				4902F3BF2AE384200004CA5C /* AppDelegate.swift */,
 				4902F3C12AE384200004CA5C /* SceneDelegate.swift */,
-				4902F3C32AE384200004CA5C /* ViewController.swift */,
 				4902F3C52AE384200004CA5C /* Main.storyboard */,
 				4902F3C82AE384240004CA5C /* Assets.xcassets */,
 				4902F3CA2AE384240004CA5C /* LaunchScreen.storyboard */,
@@ -108,7 +105,7 @@
 		4B6B8D2B2AF074250030A548 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4B790A9B2AF76070005A3F30 /* HomePageController.swift */,
+				4B790A9B2AF76070005A3F30 /* HomePageViewController.swift */,
 				4B790A9D2AF760F7005A3F30 /* StartScreenController.swift */,
 				4B790A9F2AF763E1005A3F30 /* LifePathPageController.swift */,
 			);
@@ -198,10 +195,9 @@
 				4B790A9E2AF760F7005A3F30 /* StartScreenController.swift in Sources */,
 				4B790AA42AF7679D005A3F30 /* Choice.swift in Sources */,
 				4B790A982AF75195005A3F30 /* NetworkService.swift in Sources */,
-				4B790A9C2AF76070005A3F30 /* HomePageController.swift in Sources */,
+				4B790A9C2AF76070005A3F30 /* HomePageViewController.swift in Sources */,
 				4B790A952AF73A76005A3F30 /* Event.swift in Sources */,
 				4B790A9A2AF75F88005A3F30 /* User.swift in Sources */,
-				4902F3C42AE384200004CA5C /* ViewController.swift in Sources */,
 				4B790AA22AF76527005A3F30 /* Character.swift in Sources */,
 				4902F3C02AE384200004CA5C /* AppDelegate.swift in Sources */,
 				4902F3C22AE384200004CA5C /* SceneDelegate.swift in Sources */,
