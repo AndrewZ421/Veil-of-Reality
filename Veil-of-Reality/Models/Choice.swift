@@ -12,4 +12,9 @@ class Choice: Codable {
     var id: Int
     var description: String
     // Add other properties as needed
+    
+    init(id:Int, description:String){
+        self.id = id
+        self.description = description
+    }
 }
