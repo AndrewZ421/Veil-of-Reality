@@ -16,6 +16,12 @@ enum Occupation {
     case employed, unemployed, student
 }
 
+enum Country:String{
+    case US = "United States"
+    case CHN = "China"
+    case UK = "United Kingdom"
+}
+
 struct States {
     var ageGroup: Int
     var isMarried: Bool
@@ -42,12 +48,16 @@ class Character {
     var id: Int
     var name: String
     var age: Int
+    var citizenship:Country
     var gender: Gender
     var occupation: Occupation
     var states: States
     var group: Int
+    var mather_name: String
+    var father_name: String
+    
 
-    init(id: Int, name: String, age: Int, gender: Gender, occupation: Occupation, married: Bool, student: Bool) {
+    init(id: Int, name: String, age: Int, gender: Gender, occupation: Occupation, married: Bool, student: Bool, citizenship: Country,mather: String, father: String) {
         self.id = id
         self.name = name
         self.age = age
@@ -57,18 +67,12 @@ class Character {
         let ageGroup = age / 3 // Assuming each stage represents 3 years for simplicity
         self.states = States(ageGroup: ageGroup, isMarried: married, occupation: occupation, isStudent: student)
         self.group = states.calculateGroup()
+        self.citizenship = Country.US
+        self.father_name = father
+        self.mather_name = mather
     }
     
     // You can add other functions that utilize the information within the Character class.
     
     
 }
-
-//// Example usage:
-//
-//// Create a character
-//let character = Character(name: "John Doe", age: 24, gender: .male, occupation: .employed, married: false, student: false)
-//
-//// Get the character's group
-//let group = character.states.calculateGroup()
-//print("Character group: \(group)")
