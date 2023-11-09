@@ -12,6 +12,8 @@ import UIKit
 // MARK: - 主页ViewController
 class HomePageViewController: UIViewController {
     
+    @IBOutlet weak var titleLabel: UILabel!
+    
     @IBOutlet weak var actionButton: UIButton!
     let maincharacter = Character(id: 1, name: "Test man", age: 0, gender: Gender.male, occupation: Occupation.employed, married: false, student: false)
     
@@ -23,6 +25,18 @@ class HomePageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // 进行视图的初始化和数据绑定
+        
+        //title animation
+                titleLabel.text = ""
+                var charIndex = 0.0
+                let titleText = "VeilofReality"
+                for letter in titleText{
+                    Timer.scheduledTimer(withTimeInterval: 0.1*charIndex, repeats: false) { (timer) in
+                        self.titleLabel.text?.append(letter)
+                    }
+                    charIndex += 1
+                }
+        
 
     }
     
