@@ -10,37 +10,85 @@ import UIKit
 
 
 // MARK: - 主页ViewController
-class HomePageViewController: UIViewController {
+class HomePageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var lifeTableView: UITableView!
+    @IBOutlet weak var growBtn: UIButton!
+    @IBOutlet weak var healthBar: CircularProgressBarView!
+    @IBOutlet weak var happinessBar: CircularProgressBarView!
+    @IBOutlet weak var populrityBar: CircularProgressBarView!
+    @IBOutlet weak var smartsBar: CircularProgressBarView!
     
-    @IBOutlet weak var actionButton: UIButton!
-    let maincharacter = Character(id: 1, name: "Test man", age: 0, gender: Gender.male, occupation: Occupation.employed, married: false, student: false)
+    var character = Character(id: 1, name: "test son", age: 2, gender: .male, occupation: .unemployed, married: false, student: false, citizenship: "US", mather: "test mom", father: "test dad")
+    var lifeArray: Array<String> = ["0 years old", "Borned!", "", "1 years old", "Can walk", ""]
     
+    let maincharacter = Character(id: 1, name: "Test man", age: 0, gender: Gender.male, occupation: Occupation.employed, married: false, student: false, citizenship: "United States", mather: "father man", father: "mother woman")
     
-    
-    // 这里可以定义主页需要的视图和数据模型
     var dataModel: HomePageDataModel!
+    var occupationString: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 进行视图的初始化和数据绑定
-
-    }
-    
-    // 这是连接到Storyboard中UIButton的IBAction
-    @IBAction func didTapActionButton(_ sender: UIButton) {
-        print("Button was tapped")
-        var _ = ageCharacter(character:maincharacter)
-        let testchoice = Choice(id: 1, description: "Test description")
-        sendChoice(choice: testchoice)
-    }
-    
-    // 主页的其他方法，比如处理用户的选择操作，跳转到功能页等
-    func testConnection(){
         
+        // Set nameLabel
+        switch maincharacter.occupation {
+        case .employed:
+            occupationString = "Employed"
+        case .unemployed:
+            occupationString = "Unemployed"
+        case .student:
+            occupationString = "Student"
+        }
+        nameLabel.layer.borderWidth = 2.0
+        nameLabel.layer.borderColor = UIColor.clear.cgColor
+        nameLabel.layer.cornerRadius = 15.0
+        nameLabel.layer.masksToBounds = true
+        nameLabel.text = "  " + maincharacter.name + ": " + occupationString
+        
+        // Set lifeTableView
+        lifeTableView.dataSource = self
+        lifeTableView.delegate = self
+        lifeTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        lifeTableView.separatorStyle = .none
+        
+        // Set healthBar
+        healthBar.additionalText = "Health"
+        healthBar.progress = 0.6
+        
+        // Set happinessBar
+        happinessBar.additionalText = "Happiness"
+        happinessBar.progress = 0.3
+        
+        // Set populrityBar
+        populrityBar.additionalText = "Populrity"
+        populrityBar.progress = 0.2
+        
+        // Set smartsBar
+        smartsBar.additionalText = "Smarts"
+        smartsBar.progress = 0.8
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return lifeArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        lifeTableView.deselectRow(at: indexPath, animated: true)
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        cell.selectionStyle = .none
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
+        cell.textLabel!.text = lifeArray[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 20.0
+    }
+
     
     // 用户按了Age Growth后如何向服务器request一个event。
-    func ageCharacter(character: Character) {
+    @IBAction func ageCharacter() {
         // Assuming there's an endpoint that gives us events based on character's current age.
         let url = URL(string: "http://127.0.0.1:5000")
         
@@ -50,7 +98,7 @@ class HomePageViewController: UIViewController {
                 switch result {
                 case .success(let events):
                     // Handle the successful retrieval of events
-                    self.handleEventsForCharacter(character:character, event:events)
+                    self.handleEventsForCharacter(character:self.character, event:events)
                 case .failure(let error):
                     // Handle the error scenario
                     self.handleError(error:error)

@@ -51,8 +51,9 @@ class Character {
     var mather_name: String
     var father_name: String
     
-
+// TODO: id returned by insertToDB, not appeared in parameters
     init(id: Int, name: String, age: Int, gender: Gender, occupation: Occupation, married: Bool, student: Bool, citizenship: String,mather: String, father: String) {
+//        insertToDB()
         self.id = id
         self.name = name
         self.age = age
@@ -67,6 +68,9 @@ class Character {
         self.mather_name = mather
     }
     
+    func insertToDB(name: String, age: Int, gender: Gender, occupation: Occupation, married: Bool, student: Bool, citizenship: String,mather: String, father: String){
+        
+    }
     // You can add other functions that utilize the information within the Character class.
     
     
