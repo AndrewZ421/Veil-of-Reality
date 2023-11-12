@@ -30,7 +30,8 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationItem.hidesBackButton = true
+
         // Set nameLabel
         switch maincharacter.occupation {
         case .employed:
@@ -90,6 +91,8 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     // 用户按了Age Growth后如何向服务器request一个event。
     @IBAction func ageCharacter() {
         // Assuming there's an endpoint that gives us events based on character's current age.
+        let eventViewController = self.storyboard?.instantiateViewController(withIdentifier: "TestViewController") as! TestViewController
+        self.navigationController?.pushViewController(eventViewController, animated: true)
         let url = URL(string: "http://127.0.0.1:5000")
         
         // The 'fetch' function is called with the expected type of `[Event].self`
