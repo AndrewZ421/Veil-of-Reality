@@ -11,7 +11,9 @@ import UIKit
 
 // MARK: - 主页ViewController
 class HomePageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
+    @IBOutlet weak var avatarImage: UIImageView!
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var lifeTableView: UITableView!
     @IBOutlet weak var growBtn: UIButton!
@@ -54,20 +56,28 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         lifeTableView.separatorStyle = .none
         
         // Set healthBar
+       
         healthBar.additionalText = "Health"
         healthBar.progress = 0.6
         
         // Set happinessBar
+        
         happinessBar.additionalText = "Happiness"
         happinessBar.progress = 0.3
         
         // Set populrityBar
+       
         populrityBar.additionalText = "Populrity"
         populrityBar.progress = 0.2
         
         // Set smartsBar
+        
         smartsBar.additionalText = "Smarts"
         smartsBar.progress = 0.8
+        
+        //set avatar randomly
+        
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -91,11 +101,14 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     // 用户按了Age Growth后如何向服务器request一个event。
     @IBAction func ageCharacter() {
         // Assuming there's an endpoint that gives us events based on character's current age.
+        
+        self.performSegue(withIdentifier: "ToEvent", sender: self)
+        
         let eventViewController = self.storyboard?.instantiateViewController(withIdentifier: "TestViewController") as! TestViewController
         self.navigationController?.pushViewController(eventViewController, animated: true)
         let url = URL(string: "http://127.0.0.1:5000")
         
-        // The 'fetch' function is called with the expected type of `[Event].self`
+//         The 'fetch' function is called with the expected type of `[Event].self`
         NetworkService.shared.fetch(url: url, expecting: Event.self) { result in
             DispatchQueue.main.async {
                 switch result {

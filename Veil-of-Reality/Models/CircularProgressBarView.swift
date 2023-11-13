@@ -47,7 +47,10 @@ class CircularProgressBarView: UIView {
         
         // 设置圆弧的线宽和颜色
         context?.setLineWidth(10)
-        context?.setStrokeColor(UIColor.blue.cgColor)
+        let color = #colorLiteral(red: 0.9989838004, green: 0.7470145822, blue: 0.6491046548, alpha: 1)
+        
+//        context?.setStrokeColor(UIColor.blue.cgColor)
+        context?.setStrokeColor(color.cgColor)
         
         // 绘制圆弧
         context?.addPath(path.cgPath)

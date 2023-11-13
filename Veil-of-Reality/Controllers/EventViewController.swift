@@ -20,18 +20,22 @@ class EventViewController: UIViewController {
 
     var choice: Choice!
     var event: Event!
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
+        
+        
 
-        eventName.text = event.name
-        eventDescription.text = event.description
-        choice1.setTitle(event.choices[0].description, for: .normal)
-        choice2.setTitle(event.choices[1].description, for: .normal)
-        choice3.setTitle(event.choices[2].description, for: .normal)
-        choice4.setTitle(event.choices[3].description, for: .normal)
+//        eventName.text = event.name
+//        eventDescription.text = event.description
+//        choice1.setTitle(event.choices[0].description, for: .normal)
+//        choice2.setTitle(event.choices[1].description, for: .normal)
+//        choice3.setTitle(event.choices[2].description, for: .normal)
+//        choice4.setTitle(event.choices[3].description, for: .normal)
+        
+        
         
         // Do any additional setup after loading the view.
     }
