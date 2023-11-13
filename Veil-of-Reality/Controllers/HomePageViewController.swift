@@ -22,10 +22,10 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var populrityBar: CircularProgressBarView!
     @IBOutlet weak var smartsBar: CircularProgressBarView!
     
-    var character = Character(id: 1, name: "test son", age: 2, gender: .male, occupation: .unemployed, married: false, student: false, citizenship: "US", mather: "test mom", father: "test dad")
+    var character = Character(id: 1, name: "test son", age: 2, gender: .male, occupation: .unemployed, married: false, student: false, citizenship: "US", mother: "test mom", father: "test dad")
     var lifeArray: Array<String> = ["0 years old", "Borned!", "", "1 years old", "Can walk", ""]
     
-    let maincharacter = Character(id: 1, name: "Test man", age: 0, gender: Gender.male, occupation: Occupation.employed, married: false, student: false, citizenship: "United States", mather: "father man", father: "mother woman")
+    let maincharacter = Character(id: 1, name: "Test man", age: 0, gender: Gender.male, occupation: Occupation.employed, married: false, student: false, citizenship: "United States", mother: "father man", father: "mother woman")
     
     var dataModel: HomePageDataModel!
     var occupationString: String!

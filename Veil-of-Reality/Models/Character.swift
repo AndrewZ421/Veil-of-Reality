@@ -1,45 +1,38 @@
-//
-//  Character.swift
-//  Veil-of-Reality
-//
-//  Created by Liu Xin on 11/5/23.
-//
-
 import Foundation
 
-
-enum Gender {
-    case male, female, other
+enum Gender: String, Decodable {
+    case male = "male"
+    case female = "female"
+    case other = "other"
 }
 
-enum Occupation {
-    case employed, unemployed, student
+enum Occupation: String, Decodable {
+    case employed = "employed"
+    case unemployed = "unemployed"
+    case student = "student"
 }
 
-
-struct States {
+struct States: Decodable {
     var ageGroup: Int
     var isMarried: Bool
     var occupation: Occupation
     var isStudent: Bool
     
-    // This function calculates the group based on the state parameters.
-    // Since ageGroup is already an Int, you might want to ensure that it's between 0 and 31 when it's set.
     func calculateGroup() -> Int {
-        // Adjust the logic here to fit how you want the group to be determined.
         let ageBits = String(format: "%05d", Int(String(ageGroup, radix: 2)) ?? 0)
         let genderBit = isMarried ? "1" : "0"
         let marriedBit = occupation == .employed ? "1" : "0"
         let studentBit = isStudent ? "1" : "0"
-        // 将所有的位字符串组合起来
         let combinedBits = ageBits + genderBit + marriedBit + studentBit
-        
-        // 将二进制字符串转换为十进制整数
         return Int(combinedBits, radix: 2) ?? 0
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case ageGroup, isMarried, occupation, isStudent
     }
 }
 
-class Character {
+class Character: Decodable {
     var id: Int
     var name: String
     var age: Int
@@ -48,30 +41,24 @@ class Character {
     var occupation: Occupation
     var states: States
     var group: Int
-    var mather_name: String
-    var father_name: String
+    var motherName: String
+    var fatherName: String
     
-// TODO: id returned by insertToDB, not appeared in parameters
-    init(id: Int, name: String, age: Int, gender: Gender, occupation: Occupation, married: Bool, student: Bool, citizenship: String,mather: String, father: String) {
-//        insertToDB()
+    init(id: Int, name: String, age: Int, gender: Gender, occupation: Occupation, married: Bool, student: Bool, citizenship: String, mother: String, father: String) {
         self.id = id
         self.name = name
         self.age = age
         self.gender = gender
         self.occupation = occupation
-        // Calculate the age group based on the age provided. This is a simplification.
-        let ageGroup = age / 3 // Assuming each stage represents 3 years for simplicity
+        let ageGroup = age / 3
         self.states = States(ageGroup: ageGroup, isMarried: married, occupation: occupation, isStudent: student)
         self.group = states.calculateGroup()
         self.citizenship = citizenship
-        self.father_name = father
-        self.mather_name = mather
+        self.motherName = mother
+        self.fatherName = father
     }
-    
-    func insertToDB(name: String, age: Int, gender: Gender, occupation: Occupation, married: Bool, student: Bool, citizenship: String,mather: String, father: String){
-        
+
+    private enum CodingKeys: String, CodingKey {
+        case id, name, age, citizenship, gender, occupation, states, group, motherName = "mother_name", fatherName = "father_name"
     }
-    // You can add other functions that utilize the information within the Character class.
-    
-    
 }

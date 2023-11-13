@@ -1,9 +1,11 @@
 import random
 from faker import Faker
+from database import db
+
 COUNTRY_PATH = 'data/country_codes.csv'
 
 
-def genearte_parents_name(child_name: str, locale = 'en_US'):
+def genearte_parents_name(child_name: str, locale='en_US'):
     fake = Faker()
     child_name = child_name.split(' ')
     child_last_name = child_name[-1]
@@ -15,4 +17,6 @@ def genearte_parents_name(child_name: str, locale = 'en_US'):
 
 def generate_name(country_code):
     fake = Faker(country_code)
-    pass
+    return fake.name()
+
+
