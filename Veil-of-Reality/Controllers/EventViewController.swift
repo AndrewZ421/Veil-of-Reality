@@ -42,27 +42,27 @@ class EventViewController: UIViewController {
     
     
     @IBAction func button1(_ sender: Any) {
-        choice.id = event.choices[0].id
-        choice.description = event.choices[0].description
-        sendChoice()
+//        choice.id = event.choices[0].id
+//        choice.description = event.choices[0].description
+//        sendChoice()
         jumpToHome()
     }
     @IBAction func button2(_ sender: Any) {
-        choice.id = event.choices[1].id
-        choice.description = event.choices[1].description
-        sendChoice()
+//        choice.id = event.choices[1].id
+//        choice.description = event.choices[1].description
+//        sendChoice()
         jumpToHome()
     }
     @IBAction func button3(_ sender: Any) {
-        choice.id = event.choices[2].id
-        choice.description = event.choices[2].description
-        sendChoice()
+//        choice.id = event.choices[2].id
+//        choice.description = event.choices[2].description
+//        sendChoice()
         jumpToHome()
     }
     @IBAction func button4(_ sender: Any) {
-        choice.id = event.choices[3].id
-        choice.description = event.choices[3].description
-        sendChoice()
+//        choice.id = event.choices[3].id
+//        choice.description = event.choices[3].description
+//        sendChoice()
         jumpToHome()
     }
     
