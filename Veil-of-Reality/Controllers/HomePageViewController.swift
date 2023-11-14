@@ -102,10 +102,12 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func ageCharacter() {
         // Assuming there's an endpoint that gives us events based on character's current age.
         
-        self.performSegue(withIdentifier: "ToEvent", sender: self)
+//        self.performSegue(withIdentifier: "ToEvent", sender: self)
         
-        let eventViewController = self.storyboard?.instantiateViewController(withIdentifier: "TestViewController") as! TestViewController
-        self.navigationController?.pushViewController(eventViewController, animated: true)
+//        let eventViewController = self.storyboard?.instantiateViewController(withIdentifier: "EventViewController") as! EventViewController
+//        self.navigationController?.pushViewController(eventViewController, animated: true)
+//        
+//        
         let url = URL(string: "http://127.0.0.1:5000")
         
 //         The 'fetch' function is called with the expected type of `[Event].self`
