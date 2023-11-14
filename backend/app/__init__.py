@@ -25,3 +25,7 @@ def create_app(config_class=Config):
         return Character.create_character()
 
     return app
+
+    @app.route('/get_event', methods=['GET'])
+    def get_event_route():
+        return Event.get_event()
