@@ -8,13 +8,14 @@
 import Foundation
 
 
-enum EventType: Codable{
+enum EventType: String, Codable {
     case social
     case career
     case health
     case love
     case family
 }
+
 
 
 

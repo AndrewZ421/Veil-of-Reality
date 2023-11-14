@@ -128,6 +128,17 @@ class Event(db.Model):
     def __repr__(self):
         return f'<Event {self.name}>'
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "type": self.type.name,  # Assuming EventType is an enum
+            "choices": [choice.to_dict() for choice in self.choices]
+        }
+
+
+
 
 class Choice(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -140,6 +151,13 @@ class Choice(db.Model):
 
     def __repr__(self):
         return f'<Choice {self.description}>'
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "description": self.description,
+            "event_id": self.event_id
+        }
 
 
 class Country(db.Model):
