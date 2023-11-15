@@ -7,13 +7,15 @@ from flask import jsonify
 from database import db
 import utils
 
+import enum
+
 
 class EventType(enum.Enum):
-    social = 1
-    career = 2
-    health = 3
-    love = 4
-    family = 5
+    social = 'Social'
+    career = 'Career'
+    health = 'Health'
+    love = 'Love'
+    family = 'Family'
 
 
 class User(db.Model):
@@ -50,7 +52,6 @@ class Character(db.Model):
 
     def to_dict(self):
         # 将性别和职业转换为字符串
-        # 注意：您需要根据实际情况调整这里的逻辑
 
         # 将 Character 实例转换为字典
         return {
@@ -58,8 +59,8 @@ class Character(db.Model):
             "name": self.name,
             "age": self.age,
             "citizenship": self.citizenship,
-            "gender": self.gender,  # 在这里添加逻辑以确定正确的性别字符串
-            "occupation": self.occupation,  # 在这里添加逻辑以确定正确的职业字符串
+            "gender": self.gender,
+            "occupation": self.occupation,
             "mother_name": self.mother_name,
             "father_name": self.father_name,
             # 可以根据需要添加其他字段
@@ -137,7 +138,12 @@ class Event(db.Model):
             "choices": [choice.to_dict() for choice in self.choices]
         }
 
-
+    @staticmethod
+    def get_random_event():
+        count = Event.query.count()
+        random_index = random.randint(0, count - 1)
+        event = Event.query.offset(random_index).first()
+        return jsonify(event.to_dict())
 
 
 class Choice(db.Model):
