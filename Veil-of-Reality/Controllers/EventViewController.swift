@@ -107,7 +107,7 @@ class EventViewController: UIViewController {
     }
     func jumpToHome(){
         let homePageViewController = self.storyboard?.instantiateViewController(withIdentifier: "HomePageViewController") as! HomePageViewController
-        self.navigationController?.pushViewController(homePageViewController, animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     func handleEventsForCharacter(character: Character, event: Event){
         //处理后续逻辑
