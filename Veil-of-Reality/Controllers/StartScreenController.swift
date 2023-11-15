@@ -18,6 +18,7 @@ class StartScreenController: UIViewController {
     @IBOutlet weak var fatherNameLabel: UILabel!
     @IBOutlet weak var motherNameLabel: UILabel!
     @IBOutlet weak var newLifeBtn: UIButton!
+    @IBOutlet weak var startBtn: UIButton!
     
     var dataModel: StartScreenDataModel!
     
@@ -101,18 +102,25 @@ class StartScreenController: UIViewController {
     
     @IBAction func createNewLife() {
         // TODO: Need to load data from DB later
-        let firstName = "Will"
-        let lastName = "Smith"
+        let firstName = "Test"
+        let lastName = "son"
         let gender = "male"
         let nationality = "United States"
-        let fatherFirstName = "Abel"
-        let fatherLastName = "Smith"
-        let motherFirstName = "Gadise"
-        let motherLastName = "Zenawi"
+        let fatherFirstName = "Test"
+        let fatherLastName = "dad"
+        let motherFirstName = "Test"
+        let motherLastName = "mom"
         dataModel = StartScreenDataModel(firstName: firstName, lastName: lastName, gender: gender, nationality: nationality, fatherFirstName: fatherFirstName, fatherLastName: fatherLastName, motherFirstName: motherFirstName, motherLastName: motherLastName)
         updateView()
         print("Start a new life!")
     }
+    
+    @IBAction func start(_ sender: Any) {
+        let homePageViewController = storyboard?.instantiateViewController(withIdentifier: "HomePageViewController") as! HomePageViewController
+        
+        navigationController?.pushViewController(homePageViewController, animated: true)
+    }
+    
 }
 
 struct StartScreenDataModel {
