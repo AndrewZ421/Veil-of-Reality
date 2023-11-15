@@ -26,14 +26,23 @@ class EventViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
         
-        
+        let url = URL(string: "http://127.0.0.1:5000/get_event")
+        print("Here")
+        NetworkService.shared.fetch(url: url, expecting: Event.self) { result in
+            DispatchQueue.main.async {
+                switch result {
+                    case .success(let event):  // 在这里添加 'let event'
+                        // The event was successfully fetched from the server
+                    self.getEvent(event: event)
+                    case .failure(let error):
+                        // Handle the error scenario
+                        self.handleError(error: error)
+                }
+            }
+        }
 
-//        eventName.text = event.name
-//        eventDescription.text = event.description
-//        choice1.setTitle(event.choices[0].description, for: .normal)
-//        choice2.setTitle(event.choices[1].description, for: .normal)
-//        choice3.setTitle(event.choices[2].description, for: .normal)
-//        choice4.setTitle(event.choices[3].description, for: .normal)
+
+
         
         
         
@@ -110,6 +119,16 @@ class EventViewController: UIViewController {
     
     func handleError(error:Error){
         //错误处理
+    }
+    
+    func getEvent(event: Event){
+        eventName.text = event.name
+        eventDescription.text = event.description
+        choice1.setTitle(event.choices[0].description, for: .normal)
+        choice2.setTitle(event.choices[1].description, for: .normal)
+        choice3.setTitle(event.choices[2].description, for: .normal)
+        choice4.setTitle(event.choices[3].description, for: .normal)
+        print(event.self)
     }
 
 }
