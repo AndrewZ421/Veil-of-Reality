@@ -18,7 +18,6 @@ class StartScreenController: UIViewController {
     @IBOutlet weak var fatherNameLabel: UILabel!
     @IBOutlet weak var motherNameLabel: UILabel!
     @IBOutlet weak var newLifeBtn: UIButton!
-    @IBOutlet weak var startBtn: UIButton!
     
     var dataModel: StartScreenDataModel!
     
@@ -113,6 +112,33 @@ class StartScreenController: UIViewController {
         dataModel = StartScreenDataModel(firstName: firstName, lastName: lastName, gender: gender, nationality: nationality, fatherFirstName: fatherFirstName, fatherLastName: fatherLastName, motherFirstName: motherFirstName, motherLastName: motherLastName)
         updateView()
         print("Start a new life!")
+        
+        let characterData = ["firstName": firstName, "lastName": lastName, "gender": gender, "nationality": nationality, "fatherFirstName": fatherFirstName, "fatherLastName": fatherLastName, "motherFirstName": motherFirstName, "motherLastName": motherLastName, "Health": 50, "Happiness": 50, "Populrity": 50, "Smarts": 50] as [String : Any]
+        
+        saveCharacterData(characterData: characterData)
+    }
+    
+    func saveCharacterData(characterData: [String: Any]) {
+        let fileManager = FileManager.default
+        if let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = documentsDirectory.appendingPathComponent("characterData.json")
+            print(fileURL)
+            if fileManager.fileExists(atPath: fileURL.path) {
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: characterData, options: .prettyPrinted)
+                    try jsonData.write(to: fileURL)
+                } catch {
+                    print("Error saving characterData.json: \(error)")
+                }
+            } else {
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: characterData, options: .prettyPrinted)
+                    fileManager.createFile(atPath: fileURL.path, contents: jsonData, attributes: nil)
+                } catch {
+                    print("Error creating characterData.json: \(error)")
+                }
+            }
+        }
     }
     
     @IBAction func start(_ sender: Any) {

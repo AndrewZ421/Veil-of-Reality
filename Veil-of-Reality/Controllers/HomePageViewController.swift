@@ -33,6 +33,9 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
+        
+        var characterData = loadCharacterData()
+        print(characterData)
 
         // Set nameLabel
         switch maincharacter.occupation {
@@ -78,6 +81,50 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         //set avatar randomly
         
         
+    }
+    
+    func saveCharacterData(characterData: [String: Any]) {
+        let fileManager = FileManager.default
+        if let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = documentsDirectory.appendingPathComponent("characterData.json")
+            print(fileURL)
+            if fileManager.fileExists(atPath: fileURL.path) {
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: characterData, options: .prettyPrinted)
+                    try jsonData.write(to: fileURL)
+                } catch {
+                    print("Error saving characterData.json: \(error)")
+                }
+            } else {
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: characterData, options: .prettyPrinted)
+                    fileManager.createFile(atPath: fileURL.path, contents: jsonData, attributes: nil)
+                } catch {
+                    print("Error creating characterData.json: \(error)")
+                }
+            }
+        }
+    }
+    
+    func loadCharacterData() -> [String: Any]? {
+        let fileManager = FileManager.default
+        if let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = documentsDirectory.appendingPathComponent("characterData.json")
+            
+            if fileManager.fileExists(atPath: fileURL.path) {
+                do {
+                    let data = try Data(contentsOf: fileURL)
+                    let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+                    if let characterData = jsonObject as? [String: Any] {
+                        return characterData
+                    }
+                } catch {
+                    print("Error loading characterData.json: \(error)")
+                }
+            }
+        }
+        
+        return nil
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
