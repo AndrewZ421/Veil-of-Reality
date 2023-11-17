@@ -113,30 +113,36 @@ class StartScreenController: UIViewController {
         updateView()
         print("Start a new life!")
         
-        let characterData = ["firstName": firstName, "lastName": lastName, "gender": gender, "nationality": nationality, "fatherFirstName": fatherFirstName, "fatherLastName": fatherLastName, "motherFirstName": motherFirstName, "motherLastName": motherLastName, "Health": 50, "Happiness": 50, "Populrity": 50, "Smarts": 50] as [String : Any]
+        let characterData = ["firstName": firstName, "lastName": lastName, "gender": gender, "nationality": nationality, "fatherFirstName": fatherFirstName, "fatherLastName": fatherLastName, "motherFirstName": motherFirstName, "motherLastName": motherLastName, "age": 0, "health": 50, "happiness": 50, "populrity": 50, "smarts": 50] as [String : Any]
         
         saveCharacterData(characterData: characterData)
     }
     
     func saveCharacterData(characterData: [String: Any]) {
         let fileManager = FileManager.default
+            
         if let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
             let fileURL = documentsDirectory.appendingPathComponent("characterData.json")
+            
             print(fileURL)
+            
+            // Delete old file if exists
             if fileManager.fileExists(atPath: fileURL.path) {
                 do {
-                    let jsonData = try JSONSerialization.data(withJSONObject: characterData, options: .prettyPrinted)
-                    try jsonData.write(to: fileURL)
+                    try fileManager.removeItem(at: fileURL)
+                    print("Deleted existing characterData.json")
                 } catch {
-                    print("Error saving characterData.json: \(error)")
+                    print("Error deleting existing characterData.json: \(error)")
                 }
-            } else {
-                do {
-                    let jsonData = try JSONSerialization.data(withJSONObject: characterData, options: .prettyPrinted)
-                    fileManager.createFile(atPath: fileURL.path, contents: jsonData, attributes: nil)
-                } catch {
-                    print("Error creating characterData.json: \(error)")
-                }
+            }
+            
+            // Create a new json file
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: characterData, options: [])
+                try jsonData.write(to: fileURL)
+                print("Saved characterData.json")
+            } catch {
+                print("Error saving characterData.json: \(error)")
             }
         }
     }

@@ -23,6 +23,7 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var smartsBar: CircularProgressBarView!
     
     var character = Character(id: 1, name: "test son", age: 2, gender: .male, occupation: .unemployed, married: false, student: false, citizenship: "US", mother: "test mom", father: "test dad")
+    
     var lifeArray: Array<String> = ["0 years old", "Borned!", "", "1 years old", "Can walk", ""]
     
     let maincharacter = Character(id: 1, name: "Test man", age: 0, gender: Gender.male, occupation: Occupation.employed, married: false, student: false, citizenship: "United States", mother: "father man", father: "mother woman")
@@ -35,8 +36,14 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         navigationItem.hidesBackButton = true
         
         var characterData = loadCharacterData()
-        print(characterData)
-
+        let name = (characterData!["firstName"] as! String) + " " + (characterData!["lastName"] as! String)
+        let age = characterData!["age"] as! Int
+        let citizenship = characterData!["nationality"] as! String
+        let father = (characterData!["fatherFirstName"] as! String) + " " + (characterData!["fatherLastName"] as! String)
+        let mother = (characterData!["motherFirstName"] as! String) + " " + (characterData!["motherLastName"] as! String)
+        
+        character = Character(id: 1, name: name, age: age, gender: .male, occupation: .unemployed, married: false, student: false, citizenship: citizenship, mother: mother, father: father)
+        
         // Set nameLabel
         switch maincharacter.occupation {
         case .employed:
@@ -85,23 +92,29 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func saveCharacterData(characterData: [String: Any]) {
         let fileManager = FileManager.default
+            
         if let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
             let fileURL = documentsDirectory.appendingPathComponent("characterData.json")
+            
             print(fileURL)
+            
+            // Delete old file if exists
             if fileManager.fileExists(atPath: fileURL.path) {
                 do {
-                    let jsonData = try JSONSerialization.data(withJSONObject: characterData, options: .prettyPrinted)
-                    try jsonData.write(to: fileURL)
+                    try fileManager.removeItem(at: fileURL)
+                    print("Deleted existing characterData.json")
                 } catch {
-                    print("Error saving characterData.json: \(error)")
+                    print("Error deleting existing characterData.json: \(error)")
                 }
-            } else {
-                do {
-                    let jsonData = try JSONSerialization.data(withJSONObject: characterData, options: .prettyPrinted)
-                    fileManager.createFile(atPath: fileURL.path, contents: jsonData, attributes: nil)
-                } catch {
-                    print("Error creating characterData.json: \(error)")
-                }
+            }
+            
+            // Create a new json file
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: characterData, options: [])
+                try jsonData.write(to: fileURL)
+                print("Saved characterData.json")
+            } catch {
+                print("Error saving characterData.json: \(error)")
             }
         }
     }
@@ -163,7 +176,7 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
                 switch result {
                 case .success(let events):
                     // Handle the successful retrieval of events
-                    self.handleEventsForCharacter(character:self.character, event:events)
+                    self.handleEventsForCharacter(character: self.character, event: events)
                 case .failure(let error):
                     // Handle the error scenario
                     self.handleError(error:error)

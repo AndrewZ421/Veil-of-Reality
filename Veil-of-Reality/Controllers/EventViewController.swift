@@ -49,6 +49,55 @@ class EventViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func saveCharacterData(characterData: [String: Any]) {
+        let fileManager = FileManager.default
+            
+        if let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = documentsDirectory.appendingPathComponent("characterData.json")
+            
+            print(fileURL)
+            
+            // Delete old file if exists
+            if fileManager.fileExists(atPath: fileURL.path) {
+                do {
+                    try fileManager.removeItem(at: fileURL)
+                    print("Deleted existing characterData.json")
+                } catch {
+                    print("Error deleting existing characterData.json: \(error)")
+                }
+            }
+            
+            // Create a new json file
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: characterData, options: [])
+                try jsonData.write(to: fileURL)
+                print("Saved characterData.json")
+            } catch {
+                print("Error saving characterData.json: \(error)")
+            }
+        }
+    }
+    
+    func loadCharacterData() -> [String: Any]? {
+        let fileManager = FileManager.default
+        if let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = documentsDirectory.appendingPathComponent("characterData.json")
+            
+            if fileManager.fileExists(atPath: fileURL.path) {
+                do {
+                    let data = try Data(contentsOf: fileURL)
+                    let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+                    if let characterData = jsonObject as? [String: Any] {
+                        return characterData
+                    }
+                } catch {
+                    print("Error loading characterData.json: \(error)")
+                }
+            }
+        }
+        
+        return nil
+    }
     
     @IBAction func button1(_ sender: Any) {
 //        choice.id = event.choices[0].id
