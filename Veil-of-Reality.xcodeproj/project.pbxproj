@@ -23,6 +23,12 @@
 		4B790AA02AF763E1005A3F30 /* LifePathPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B790A9F2AF763E1005A3F30 /* LifePathPageController.swift */; };
 		4B790AA22AF76527005A3F30 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B790AA12AF76527005A3F30 /* Character.swift */; };
 		4B790AA42AF7679D005A3F30 /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B790AA32AF7679D005A3F30 /* Choice.swift */; };
+		FB35526F2B12A3B500365582 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB35526D2B12A3B500365582 /* ListCell.swift */; };
+		FB3552702B12A3B500365582 /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB35526E2B12A3B500365582 /* ListCell.xib */; };
+		FB3552722B12A9AB00365582 /* OccupationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3552712B12A9AB00365582 /* OccupationViewController.swift */; };
+		FB3552742B12AB5300365582 /* ListInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3552732B12AB5300365582 /* ListInfo.swift */; };
+		FB8FC9B62B106CBE0092FE43 /* JotiOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB8FC9B52B106CBE0092FE43 /* JotiOne-Regular.ttf */; };
+		FBBCCE4B2B1064D800A11497 /* DeathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBCCE4A2B1064D800A11497 /* DeathView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +50,12 @@
 		4B790A9F2AF763E1005A3F30 /* LifePathPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifePathPageController.swift; sourceTree = "<group>"; };
 		4B790AA12AF76527005A3F30 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		4B790AA32AF7679D005A3F30 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
+		FB35526D2B12A3B500365582 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = SOURCE_ROOT; };
+		FB35526E2B12A3B500365582 /* ListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = SOURCE_ROOT; };
+		FB3552712B12A9AB00365582 /* OccupationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccupationViewController.swift; sourceTree = "<group>"; };
+		FB3552732B12AB5300365582 /* ListInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInfo.swift; sourceTree = "<group>"; };
+		FB8FC9B52B106CBE0092FE43 /* JotiOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JotiOne-Regular.ttf"; sourceTree = "<group>"; };
+		FBBCCE4A2B1064D800A11497 /* DeathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeathView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +88,7 @@
 		4902F3BE2AE384200004CA5C /* Veil-of-Reality */ = {
 			isa = PBXGroup;
 			children = (
+				FB8FC9B42B106CA30092FE43 /* fonts */,
 				4B790A962AF7515F005A3F30 /* Networking */,
 				4B6B8D2B2AF074250030A548 /* Controllers */,
 				4B6B8D2A2AF074060030A548 /* Views */,
@@ -86,6 +99,7 @@
 				4902F3C82AE384240004CA5C /* Assets.xcassets */,
 				4902F3CA2AE384240004CA5C /* LaunchScreen.storyboard */,
 				4902F3CD2AE384240004CA5C /* Info.plist */,
+				FBBCCE4A2B1064D800A11497 /* DeathView.swift */,
 			);
 			path = "Veil-of-Reality";
 			sourceTree = "<group>";
@@ -98,6 +112,7 @@
 				4B790AA12AF76527005A3F30 /* Character.swift */,
 				4B790AA32AF7679D005A3F30 /* Choice.swift */,
 				49AF8F262AFF464D009E4236 /* CircularProgressBarView.swift */,
+				FB3552732B12AB5300365582 /* ListInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -105,6 +120,8 @@
 		4B6B8D2A2AF074060030A548 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FB35526D2B12A3B500365582 /* ListCell.swift */,
+				FB35526E2B12A3B500365582 /* ListCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -117,6 +134,7 @@
 				4B790A9F2AF763E1005A3F30 /* LifePathPageController.swift */,
 				3D4707CE2B0171DA0080D2AE /* EventViewController.swift */,
 				3D4707F22B0187430080D2AE /* TestViewController.swift */,
+				FB3552712B12A9AB00365582 /* OccupationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -127,6 +145,14 @@
 				4B790A972AF75195005A3F30 /* NetworkService.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		FB8FC9B42B106CA30092FE43 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				FB8FC9B52B106CBE0092FE43 /* JotiOne-Regular.ttf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,7 +215,9 @@
 			files = (
 				4902F3CC2AE384240004CA5C /* LaunchScreen.storyboard in Resources */,
 				4902F3C92AE384240004CA5C /* Assets.xcassets in Resources */,
+				FB8FC9B62B106CBE0092FE43 /* JotiOne-Regular.ttf in Resources */,
 				4902F3C72AE384200004CA5C /* Main.storyboard in Resources */,
+				FB3552702B12A3B500365582 /* ListCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,14 +231,18 @@
 				4B790AA02AF763E1005A3F30 /* LifePathPageController.swift in Sources */,
 				4B790A9E2AF760F7005A3F30 /* StartScreenController.swift in Sources */,
 				4B790AA42AF7679D005A3F30 /* Choice.swift in Sources */,
+				FB35526F2B12A3B500365582 /* ListCell.swift in Sources */,
 				4B790A982AF75195005A3F30 /* NetworkService.swift in Sources */,
 				4B790A9C2AF76070005A3F30 /* HomePageViewController.swift in Sources */,
 				3D4707F32B0187430080D2AE /* TestViewController.swift in Sources */,
 				3D4707CF2B0171DA0080D2AE /* EventViewController.swift in Sources */,
+				FBBCCE4B2B1064D800A11497 /* DeathView.swift in Sources */,
 				4B790A952AF73A76005A3F30 /* Event.swift in Sources */,
 				4B790A9A2AF75F88005A3F30 /* User.swift in Sources */,
 				4B790AA22AF76527005A3F30 /* Character.swift in Sources */,
 				49AF8F272AFF464D009E4236 /* CircularProgressBarView.swift in Sources */,
+				FB3552742B12AB5300365582 /* ListInfo.swift in Sources */,
+				FB3552722B12A9AB00365582 /* OccupationViewController.swift in Sources */,
 				4902F3C02AE384200004CA5C /* AppDelegate.swift in Sources */,
 				4902F3C22AE384200004CA5C /* SceneDelegate.swift in Sources */,
 			);
