@@ -23,6 +23,8 @@
 		4B790AA02AF763E1005A3F30 /* LifePathPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B790A9F2AF763E1005A3F30 /* LifePathPageController.swift */; };
 		4B790AA22AF76527005A3F30 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B790AA12AF76527005A3F30 /* Character.swift */; };
 		4B790AA42AF7679D005A3F30 /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B790AA32AF7679D005A3F30 /* Choice.swift */; };
+		FB31FFDB2B12B72800CE0F2E /* JobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB31FFDA2B12B72800CE0F2E /* JobView.swift */; };
+		FB31FFDD2B12CFB700CE0F2E /* WealthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB31FFDC2B12CFB700CE0F2E /* WealthView.swift */; };
 		FB35526F2B12A3B500365582 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB35526D2B12A3B500365582 /* ListCell.swift */; };
 		FB3552702B12A3B500365582 /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB35526E2B12A3B500365582 /* ListCell.xib */; };
 		FB3552722B12A9AB00365582 /* OccupationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3552712B12A9AB00365582 /* OccupationViewController.swift */; };
@@ -50,6 +52,8 @@
 		4B790A9F2AF763E1005A3F30 /* LifePathPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifePathPageController.swift; sourceTree = "<group>"; };
 		4B790AA12AF76527005A3F30 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		4B790AA32AF7679D005A3F30 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
+		FB31FFDA2B12B72800CE0F2E /* JobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobView.swift; sourceTree = "<group>"; };
+		FB31FFDC2B12CFB700CE0F2E /* WealthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WealthView.swift; sourceTree = "<group>"; };
 		FB35526D2B12A3B500365582 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = SOURCE_ROOT; };
 		FB35526E2B12A3B500365582 /* ListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = SOURCE_ROOT; };
 		FB3552712B12A9AB00365582 /* OccupationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OccupationViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +104,8 @@
 				4902F3CA2AE384240004CA5C /* LaunchScreen.storyboard */,
 				4902F3CD2AE384240004CA5C /* Info.plist */,
 				FBBCCE4A2B1064D800A11497 /* DeathView.swift */,
+				FB31FFDA2B12B72800CE0F2E /* JobView.swift */,
+				FB31FFDC2B12CFB700CE0F2E /* WealthView.swift */,
 			);
 			path = "Veil-of-Reality";
 			sourceTree = "<group>";
@@ -234,6 +240,7 @@
 				FB35526F2B12A3B500365582 /* ListCell.swift in Sources */,
 				4B790A982AF75195005A3F30 /* NetworkService.swift in Sources */,
 				4B790A9C2AF76070005A3F30 /* HomePageViewController.swift in Sources */,
+				FB31FFDB2B12B72800CE0F2E /* JobView.swift in Sources */,
 				3D4707F32B0187430080D2AE /* TestViewController.swift in Sources */,
 				3D4707CF2B0171DA0080D2AE /* EventViewController.swift in Sources */,
 				FBBCCE4B2B1064D800A11497 /* DeathView.swift in Sources */,
@@ -244,6 +251,7 @@
 				FB3552742B12AB5300365582 /* ListInfo.swift in Sources */,
 				FB3552722B12A9AB00365582 /* OccupationViewController.swift in Sources */,
 				4902F3C02AE384200004CA5C /* AppDelegate.swift in Sources */,
+				FB31FFDD2B12CFB700CE0F2E /* WealthView.swift in Sources */,
 				4902F3C22AE384200004CA5C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
