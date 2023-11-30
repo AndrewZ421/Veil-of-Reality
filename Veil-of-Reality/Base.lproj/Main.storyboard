@@ -307,12 +307,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="jobButton"/>
+                                <connections>
+                                    <action selector="showJobView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="04s-Oe-SKO"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x4v-bD-T3R" userLabel="Wealth Bnt">
                                 <rect key="frame" x="241" y="470" width="155" height="74"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="wealthbutton"/>
+                                <connections>
+                                    <action selector="showWealthView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BeO-66-DeO"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -324,10 +330,12 @@
                         <outlet property="growBtn" destination="gu1-ig-GGR" id="dcs-ek-d2C"/>
                         <outlet property="happinessBar" destination="hGM-Jg-9ZK" id="0JW-vS-Lcw"/>
                         <outlet property="healthBar" destination="XIm-fv-gPK" id="6Is-wf-IyY"/>
+                        <outlet property="jobBtn" destination="L3M-DE-mCN" id="mXN-HO-D6m"/>
                         <outlet property="lifeTableView" destination="Mu6-BN-LCC" id="ieN-Po-pvX"/>
                         <outlet property="nameLabel" destination="9UN-PH-Tpo" id="rYz-FD-w8B"/>
                         <outlet property="populrityBar" destination="tbR-8C-w5V" id="ZFl-c5-4Nk"/>
                         <outlet property="smartsBar" destination="GSd-km-qAX" id="geC-O0-3hk"/>
+                        <outlet property="wealthBtn" destination="x4v-bD-T3R" id="V4x-NS-Dci"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

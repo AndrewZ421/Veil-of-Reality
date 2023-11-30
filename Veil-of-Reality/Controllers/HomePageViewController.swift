@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 
 // MARK: - 主页ViewController
@@ -17,6 +18,10 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var lifeTableView: UITableView!
     @IBOutlet weak var growBtn: UIButton!
+    
+    @IBOutlet weak var jobBtn: UIButton!
+    @IBOutlet weak var wealthBtn: UIButton!
+    
     @IBOutlet weak var healthBar: CircularProgressBarView!
     @IBOutlet weak var happinessBar: CircularProgressBarView!
     @IBOutlet weak var populrityBar: CircularProgressBarView!
@@ -89,6 +94,19 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         
         
     }
+    
+    @IBAction func showJobView(_ sender: Any) {
+        let jobView = JobView()
+        let hostingController = UIHostingController(rootView: jobView)
+        self.present(hostingController, animated: true, completion: nil)
+    }
+    
+    @IBAction func showWealthView(_ sender: Any) {
+        let wealthView = WealthView()
+        let hostingController = UIHostingController(rootView: wealthView)
+        self.present(hostingController, animated: true, completion: nil)
+    }
+    
     
     func saveCharacterData(characterData: [String: Any]) {
         let fileManager = FileManager.default
