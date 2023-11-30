@@ -27,11 +27,9 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var populrityBar: CircularProgressBarView!
     @IBOutlet weak var smartsBar: CircularProgressBarView!
     
-    var character = Character(id: 1, name: "test son", age: 2, gender: .male, occupation: .unemployed, married: false, student: false, citizenship: "US", mother: "test mom", father: "test dad")
-    
     var lifeArray: Array<String> = ["0 years old", "Borned!", "", "1 years old", "Can walk", ""]
     
-    let maincharacter = Character(id: 1, name: "Test man", age: 0, gender: Gender.male, occupation: Occupation.employed, married: false, student: false, citizenship: "United States", mother: "father man", father: "mother woman")
+    var mainCharacter = Character(id: 1, name: "Test man", age: 0, gender: Gender.male, occupation: Occupation.employed, married: false, student: false, citizenship: "United States", mother: "father man", father: "mother woman", job: "Unemployed", salary: 0, wealth: 0)
     
     var dataModel: HomePageDataModel!
     var occupationString: String!
@@ -39,30 +37,29 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
-        
-        var characterData = loadCharacterData()
+        refreshHomePageContent()
+    }
+
+    func refreshHomePageContent() {
+        let characterData = loadCharacterData()
+        print(characterData)
         let name = (characterData!["firstName"] as! String) + " " + (characterData!["lastName"] as! String)
         let age = characterData!["age"] as! Int
         let citizenship = characterData!["nationality"] as! String
         let father = (characterData!["fatherFirstName"] as! String) + " " + (characterData!["fatherLastName"] as! String)
         let mother = (characterData!["motherFirstName"] as! String) + " " + (characterData!["motherLastName"] as! String)
+        let job = characterData!["job"] as! String
+        let salary = characterData!["salary"] as! Int
+        let wealth = characterData!["wealth"] as! Int
         
-        character = Character(id: 1, name: name, age: age, gender: .male, occupation: .unemployed, married: false, student: false, citizenship: citizenship, mother: mother, father: father)
+        mainCharacter = Character(id: 1, name: name, age: age, gender: .male, occupation: .unemployed, married: false, student: false, citizenship: citizenship, mother: mother, father: father, job: job, salary: salary, wealth: wealth)
         
         // Set nameLabel
-        switch maincharacter.occupation {
-        case .employed:
-            occupationString = "Employed"
-        case .unemployed:
-            occupationString = "Unemployed"
-        case .student:
-            occupationString = "Student"
-        }
         nameLabel.layer.borderWidth = 2.0
         nameLabel.layer.borderColor = UIColor.clear.cgColor
         nameLabel.layer.cornerRadius = 15.0
         nameLabel.layer.masksToBounds = true
-        nameLabel.text = "  " + maincharacter.name + ": " + occupationString
+        nameLabel.text = "  " + mainCharacter.name + ": " + mainCharacter.job
         
         // Set lifeTableView
         lifeTableView.dataSource = self
@@ -91,12 +88,13 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         smartsBar.progress = 0.8
         
         //set avatar randomly
-        
-        
     }
     
     @IBAction func showJobView(_ sender: Any) {
-        let jobView = JobView()
+        var jobView = JobView()
+        jobView.onJobSelected = {
+            self.refreshHomePageContent()
+        }
         let hostingController = UIHostingController(rootView: jobView)
         self.present(hostingController, animated: true, completion: nil)
     }
@@ -106,7 +104,6 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         let hostingController = UIHostingController(rootView: wealthView)
         self.present(hostingController, animated: true, completion: nil)
     }
-    
     
     func saveCharacterData(characterData: [String: Any]) {
         let fileManager = FileManager.default
@@ -194,7 +191,7 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
                 switch result {
                 case .success(let events):
                     // Handle the successful retrieval of events
-                    self.handleEventsForCharacter(character: self.character, event: events)
+                    self.handleEventsForCharacter(character: self.mainCharacter, event: events)
                 case .failure(let error):
                     // Handle the error scenario
                     self.handleError(error:error)

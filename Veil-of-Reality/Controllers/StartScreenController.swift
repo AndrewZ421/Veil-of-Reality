@@ -100,7 +100,6 @@ class StartScreenController: UIViewController {
     }
     
     @IBAction func createNewLife() {
-        // TODO: Need to load data from DB later
         let firstName = "Test"
         let lastName = "son"
         let gender = "male"
@@ -113,7 +112,7 @@ class StartScreenController: UIViewController {
         updateView()
         print("Start a new life!")
         
-        let characterData = ["firstName": firstName, "lastName": lastName, "gender": gender, "nationality": nationality, "fatherFirstName": fatherFirstName, "fatherLastName": fatherLastName, "motherFirstName": motherFirstName, "motherLastName": motherLastName, "age": 0, "health": 50, "happiness": 50, "populrity": 50, "smarts": 50] as [String : Any]
+        let characterData = ["firstName": firstName, "lastName": lastName, "gender": gender, "nationality": nationality, "fatherFirstName": fatherFirstName, "fatherLastName": fatherLastName, "motherFirstName": motherFirstName, "motherLastName": motherLastName, "age": 0, "health": 50, "happiness": 50, "populrity": 50, "smarts": 50, "job": "Unempolyed", "salary": 0, "wealth": 0] as [String : Any]
         
         saveCharacterData(characterData: characterData)
     }
