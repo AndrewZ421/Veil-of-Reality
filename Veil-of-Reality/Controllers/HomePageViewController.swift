@@ -24,12 +24,12 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBOutlet weak var healthBar: CircularProgressBarView!
     @IBOutlet weak var happinessBar: CircularProgressBarView!
-    @IBOutlet weak var populrityBar: CircularProgressBarView!
+    @IBOutlet weak var popularityBar: CircularProgressBarView!
     @IBOutlet weak var smartsBar: CircularProgressBarView!
     
     var lifeArray: Array<String> = ["0 years old", "Borned!", "", "1 years old", "Can walk", ""]
     
-    var mainCharacter = Character(id: 1, name: "Test man", age: 0, gender: Gender.male, occupation: Occupation.employed, married: false, student: false, citizenship: "United States", mother: "father man", father: "mother woman", job: "Unemployed", salary: 0, wealth: 0)
+    var mainCharacter = Character(id: 1, name: "Test man", age: 0, gender: Gender.male, occupation: Occupation.employed, married: false, student: false, citizenship: "United States", mother: "father man", father: "mother woman", health: 50, happiness: 50, popularity: 50, smarts: 50, job: "Unemployed", salary: 0, wealth: 0)
     
     var dataModel: HomePageDataModel!
     var occupationString: String!
@@ -48,11 +48,15 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         let citizenship = characterData!["nationality"] as! String
         let father = (characterData!["fatherFirstName"] as! String) + " " + (characterData!["fatherLastName"] as! String)
         let mother = (characterData!["motherFirstName"] as! String) + " " + (characterData!["motherLastName"] as! String)
+        let health = characterData!["health"] as! Int
+        let happiness = characterData!["happiness"] as! Int
+        let popularity = characterData!["popularity"] as! Int
+        let smarts = characterData!["smarts"] as! Int
         let job = characterData!["job"] as! String
         let salary = characterData!["salary"] as! Int
         let wealth = characterData!["wealth"] as! Int
         
-        mainCharacter = Character(id: 1, name: name, age: age, gender: .male, occupation: .unemployed, married: false, student: false, citizenship: citizenship, mother: mother, father: father, job: job, salary: salary, wealth: wealth)
+        mainCharacter = Character(id: 1, name: name, age: age, gender: .male, occupation: .unemployed, married: false, student: false, citizenship: citizenship, mother: mother, father: father, health: health, happiness: happiness, popularity: popularity, smarts: smarts, job: job, salary: salary, wealth: wealth)
         
         // Set nameLabel
         nameLabel.layer.borderWidth = 2.0
@@ -68,24 +72,22 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         lifeTableView.separatorStyle = .none
         
         // Set healthBar
-       
         healthBar.additionalText = "Health"
-        healthBar.progress = 0.6
+        healthBar.progress = CGFloat(mainCharacter.health) / 100
         
         // Set happinessBar
-        
         happinessBar.additionalText = "Happiness"
-        happinessBar.progress = 0.3
+        happinessBar.progress = CGFloat(mainCharacter.happiness) / 100
         
-        // Set populrityBar
+        // Set popularityBar
        
-        populrityBar.additionalText = "Populrity"
-        populrityBar.progress = 0.2
+        popularityBar.additionalText = "Popularity"
+        popularityBar.progress = CGFloat(mainCharacter.popularity) / 100
         
         // Set smartsBar
         
         smartsBar.additionalText = "Smarts"
-        smartsBar.progress = 0.8
+        smartsBar.progress = CGFloat(mainCharacter.smarts) / 100
         
         //set avatar randomly
     }
@@ -100,7 +102,10 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     @IBAction func showWealthView(_ sender: Any) {
-        let wealthView = WealthView()
+        var wealthView = WealthView()
+        wealthView.onItemSelected = {
+            self.refreshHomePageContent()
+        }
         let hostingController = UIHostingController(rootView: wealthView)
         self.present(hostingController, animated: true, completion: nil)
     }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct WealthView: View {
+    var onItemSelected: (() -> Void)?
     var body: some View {
         VStack {
             
@@ -29,9 +30,32 @@ struct WealthView: View {
             
             List(wealthData) { item in
                 Button(action: {
-                    //点击后的行为
-                    
                     print("\(item.name) was tapped")
+                    let cost = Int(item.cost.replacingOccurrences(of: "$", with: "").replacingOccurrences(of: ",", with: ""))!
+                    let characterData = loadCharacterData()
+                    let health = characterData!["health"] as! Int
+                    let happiness = characterData!["happiness"] as! Int
+                    let popularity = characterData!["popularity"] as! Int
+                    let smarts = characterData!["smarts"] as! Int
+                    let wealth = characterData!["wealth"] as! Int
+
+                    if wealth >= cost {
+                        var updatedCharacterData = characterData // Create a mutable copy
+
+                        // Update the values
+                        updatedCharacterData!["wealth"] = wealth - cost
+                        updatedCharacterData!["health"] = health + item.changes[0]
+                        updatedCharacterData!["happiness"] = happiness + item.changes[1]
+                        updatedCharacterData!["popularity"] = popularity + item.changes[2]
+                        updatedCharacterData!["smarts"] = smarts + item.changes[3]
+
+                        // Save the updated character data
+                        saveCharacterData(characterData: updatedCharacterData!)
+                    }
+                    else {
+                        print("No enough money")
+                    }
+                    onItemSelected?()
                 }){
                     HStack {
                         Image(item.imageName)
@@ -79,15 +103,16 @@ struct WealthData: Identifiable {
     let imageName: String
     let name: String
     let cost: String
+    let changes: [Int]
 }
 
 let wealthData = [
-    WealthData(imageName: "movie", name: "Make a movie", cost: "-$65,195"),
-    WealthData(imageName: "haircut", name: "Haircut", cost: "-$50"),
-    WealthData(imageName: "church", name: "Donate to the church", cost: "-$1000"),
-    WealthData(imageName: "shopping", name: "Shopping", cost: "-$2190"),
-    WealthData(imageName: "master", name: "Attend graduate school", cost: "-$57,600"),
-    WealthData(imageName: "gym", name: "Go Gym", cost: "-$216"),
-    WealthData(imageName: "cigarette", name: "Buy Cigarette", cost: "-$125")
+    WealthData(imageName: "movie", name: "Make a movie", cost: "$65,195", changes: [0, 5, 0, 0]),
+    WealthData(imageName: "haircut", name: "Haircut", cost: "$50", changes: [0, 1, 1, 0]),
+    WealthData(imageName: "church", name: "Donate to the church", cost: "$1000", changes: [0, 2, 0, 0]),
+    WealthData(imageName: "shopping", name: "Shopping", cost: "$2190", changes: [0, 3, 0, 0]),
+    WealthData(imageName: "master", name: "Attend graduate school", cost: "$57,600", changes: [0, 0, 0, 10]),
+    WealthData(imageName: "gym", name: "Go Gym", cost: "$216", changes: [1, 0, 1, 0]),
+    WealthData(imageName: "cigarette", name: "Buy Cigarette", cost: "$125", changes: [-1, 2, 0, 0])
     
 ]

@@ -43,11 +43,15 @@ class Character: Decodable {
     var group: Int
     var motherName: String
     var fatherName: String
+    var health: Int
+    var happiness: Int
+    var popularity: Int
+    var smarts: Int
     var job: String
     var salary: Int
     var wealth: Int
     
-    init(id: Int, name: String, age: Int, gender: Gender, occupation: Occupation, married: Bool, student: Bool, citizenship: String, mother: String, father: String, job: String, salary: Int, wealth: Int) {
+    init(id: Int, name: String, age: Int, gender: Gender, occupation: Occupation, married: Bool, student: Bool, citizenship: String, mother: String, father: String, health: Int, happiness: Int, popularity: Int, smarts: Int, job: String, salary: Int, wealth: Int) {
         self.id = id
         self.name = name
         self.age = age
@@ -59,12 +63,16 @@ class Character: Decodable {
         self.citizenship = citizenship
         self.motherName = mother
         self.fatherName = father
+        self.health = health
+        self.happiness = happiness
+        self.popularity = popularity
+        self.smarts = smarts
         self.job = job
         self.salary = salary
         self.wealth = wealth
     }
 
     private enum CodingKeys: String, CodingKey {
-        case id, name, age, citizenship, gender, occupation, states, group, motherName = "mother_name", fatherName = "father_name", job, salary, wealth
+        case id, name, age, citizenship, gender, occupation, states, group, motherName = "mother_name", fatherName = "father_name", health, happiness, popularity, smarts, job, salary, wealth
     }
 }

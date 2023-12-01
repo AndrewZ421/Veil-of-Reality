@@ -333,7 +333,7 @@
                         <outlet property="jobBtn" destination="L3M-DE-mCN" id="mXN-HO-D6m"/>
                         <outlet property="lifeTableView" destination="Mu6-BN-LCC" id="ieN-Po-pvX"/>
                         <outlet property="nameLabel" destination="9UN-PH-Tpo" id="rYz-FD-w8B"/>
-                        <outlet property="populrityBar" destination="tbR-8C-w5V" id="ZFl-c5-4Nk"/>
+                        <outlet property="popularityBar" destination="tbR-8C-w5V" id="QY0-ft-BFc"/>
                         <outlet property="smartsBar" destination="GSd-km-qAX" id="geC-O0-3hk"/>
                         <outlet property="wealthBtn" destination="x4v-bD-T3R" id="V4x-NS-Dci"/>
                     </connections>

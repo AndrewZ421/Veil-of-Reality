@@ -34,13 +34,9 @@ struct JobView: View {
             List(jobData) { job in
                 Button(action: {
                     var characterData = loadCharacterData()
-                    print(1)
-                    print(characterData)
                     characterData!["job"] = job.name
                     characterData!["salary"] = Int(job.salary.replacingOccurrences(of: "$", with: "").replacingOccurrences(of: ",", with: ""))
                     saveCharacterData(characterData: characterData!)
-                    print(2)
-                    print(characterData)
                     print("\(job.name) was tapped")
                     
                     onJobSelected?()
