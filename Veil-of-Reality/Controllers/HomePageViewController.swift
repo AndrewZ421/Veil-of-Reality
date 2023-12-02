@@ -203,6 +203,14 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
         }
+        
+        var characterData = loadCharacterData()
+        let salary = characterData!["salary"] as! Int
+        var wealth = characterData!["wealth"] as! Int
+        wealth = wealth + salary
+        characterData!["wealth"] = wealth
+        saveCharacterData(characterData: characterData!)
+        print(characterData)
     }
     
     func sendChoice(choice: Choice){
@@ -221,7 +229,6 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
         }
-
     }
     
     func handleEventsForCharacter(character: Character, event: Event){
