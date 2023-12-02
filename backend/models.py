@@ -47,8 +47,12 @@ class Character(db.Model):
         self.citizenship = citizenship
         self.mother_name = mother_name
         self.father_name = father_name
-        self.gender = occupation
+        self.gender = gender
         self.occupation = occupation
+        self.smart = random.randint(0, 100)
+        self.salary = 0
+        self.wealth = random.randint(0, 100)
+        self.job = "unemployed"
 
     def to_dict(self):
         # 将性别和职业转换为字符串
@@ -63,7 +67,10 @@ class Character(db.Model):
             "occupation": self.occupation,
             "mother_name": self.mother_name,
             "father_name": self.father_name,
-            # 可以根据需要添加其他字段
+            "smart": self.smart,
+            "salary": self.salary,
+            "wealth": self.wealth,
+            "job": self.job
         }
 
     @staticmethod
@@ -113,6 +120,31 @@ class Character(db.Model):
             db.session.rollback()
             raise e
 
+    def update_character(self, new_character):
+        self.age = new_character["age"]
+        self.smart = new_character["smart"]
+        self.salary = new_character["salary"]
+        self.wealth = new_character["wealth"]
+        self.job = new_character["job"]
+        self.occupation = new_character["occupation"]
+        try:
+            db.session.commit()
+            return jsonify(self.to_dict())
+        except Exception as e:
+            db.session.rollback()
+            raise e
+
+    def random_update_character(self, charater):
+        self.age += 1
+        self.smart += random.randint(-5, 5)
+        self.salary += random.randint(-5, 5)
+        self.wealth += random.randint(-5, 5)
+        try:
+            db.session.commit()
+            return jsonify(self.to_dict())
+        except Exception as e:
+            db.session.rollback()
+            raise e
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)

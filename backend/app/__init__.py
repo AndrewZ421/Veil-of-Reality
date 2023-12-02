@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from database import db
 from models import *
+from flask import request
 
 
 def create_app(config_class=Config):
@@ -29,5 +30,14 @@ def create_app(config_class=Config):
     @app.route('/get_event', methods=['GET'])
     def get_event_route():
         return Event.get_random_event()
+
+    @app.route('/update_character', methods=['POST'])
+    def update_character_route(charater: Character):
+        return charater.update_character(charater)
+
+    @app.route('/random_update_character', methods=['POST'])
+    def random_update_character_route(charater: Character):
+        return charater.random_update_character(charater)
+
 
     return app

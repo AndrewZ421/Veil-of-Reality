@@ -53,4 +53,5 @@ def load_event_to_db(filename):
         db.session.commit()
 
 with app.app_context():
-    load_event_to_db('./data/events.csv')
+    load_event_to_db('./data/updated_events.csv')
+    load_country_to_db('./data/country_codes.csv')
