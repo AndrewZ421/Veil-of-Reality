@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct JobView: View {
+    //弹窗相关属性
+    @State private var showAlert = false
+    @State private var isConditionMet = false
+    
     var onJobSelected: (() -> Void)?
     var body: some View {
         
@@ -25,11 +29,13 @@ struct JobView: View {
                             .inset(by: 0.50)
                             .stroke(Color(red: 0.64, green: 0.65, blue: 0.65), lineWidth: 0.50)
                     )
+                    .padding(.top,40)
                 
                 Text("Occupation").font(Font.custom("JotiOne-Regular", size: 32))
                     .foregroundColor(.white)
+                    .padding(.top, 40)
             }
-            .padding(.top);
+            
             
             List(jobData) { job in
                 Button(action: {
@@ -40,7 +46,13 @@ struct JobView: View {
                     print("\(job.name) was tapped")
                     
                     onJobSelected?()
-                }){
+                    //检查条件是否满足
+                    if !isConditionMet {
+                        self.showAlert = true
+                    }
+                    
+                })
+                {
                     HStack {
                         Image(job.imageName)
                             .resizable()
@@ -59,13 +71,26 @@ struct JobView: View {
                     
                     
                 }
+                .padding(.bottom,-3)
+                
+                .alert("Can't get a job", isPresented: $showAlert) {
+                    Button("OK", role: .cancel){    }
+                }message: {
+                    Text("You are not smart enough!")
+                }
+                        
+                    
+                    
+                    
+                
                 
             }
-            .padding(.bottom, 2.0)
+            
+            
             Image("jobsentence")
             
         }
-            
+        
             
             
            

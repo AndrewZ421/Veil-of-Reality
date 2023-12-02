@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct WealthView: View {
+    @State private var showAlert = false
+    @State private var isConditionMet = false
+    
     var onItemSelected: (() -> Void)?
     var body: some View {
         VStack {
@@ -22,11 +25,12 @@ struct WealthView: View {
                             .inset(by: 0.50)
                             .stroke(Color(red: 0.64, green: 0.65, blue: 0.65), lineWidth: 0.50)
                     )
+                    
                 
                 Text("Wealth").font(Font.custom("JotiOne-Regular", size: 32))
                     .foregroundColor(.white)
             }
-            .padding(.top, 5.0);
+            .padding(.top, 40);
             
             List(wealthData) { item in
                 Button(action: {
@@ -53,7 +57,10 @@ struct WealthView: View {
                         saveCharacterData(characterData: updatedCharacterData!)
                     }
                     else {
-                        print("No enough money")
+                        //检查条件是否满足
+                        if !isConditionMet {
+                            self.showAlert = true
+                        }
                     }
                     onItemSelected?()
                 }){
@@ -72,13 +79,18 @@ struct WealthView: View {
                         }
                         
                     }
-                    
-                    
+                    .padding(.bottom, -4)
+                    .alert("Failed Purchase", isPresented: $showAlert) {
+                        Button("OK", role: .cancel){    }
+                    }message: {
+                        Text("You don't have enough money!")
+                    }
                 }
                 
             }
-            .padding(.bottom, 1.0)
-            Image("moneywings")
+            
+           
+            Image("moneywings").padding(.top,-10)
             
         }
             
