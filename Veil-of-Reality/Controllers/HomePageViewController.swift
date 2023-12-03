@@ -34,6 +34,31 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     var dataModel: HomePageDataModel!
     var occupationString: String!
     
+    
+//    struct CharacterDataModel: Codable {
+//        var lastname: String
+//        var gender: String
+//        var fatherFirstName: String
+//        var smarts: Int
+//        var age: Int
+//        var password: String
+//        var fatherLastName: String
+//        var nationality: String
+//        var happiness: Int
+//        var username: String
+//        var health: Int
+//        var job: String
+//        var popularity: Int
+//        var firstName: String
+//        var salary: Int
+//        var motherLastName: String
+//        var wealth: Int
+//        var motherFirstName: String
+//    }
+    var username: String!
+    var password: String!
+    var newLifeOrNot: Bool!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
@@ -137,27 +162,65 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
                 print("Error saving characterData.json: \(error)")
             }
         }
+        
+        
+        
+        let storedData = UserDefaults.standard.data(forKey: "save")
+        let decodedDictionary = try? JSONSerialization.jsonObject(with: storedData!, options: []) as? [String: Any]
+        
+        var saveData = decodedDictionary
+        
+        var characterDataSave = characterData
+        print(username)
+        characterDataSave["password"] = password
+        saveData?[username] = characterDataSave
+        print("#########")
+        print(saveData)
+        print("#########")
+        let jsonData = try? JSONSerialization.data(withJSONObject: saveData)
+//        let decodedData = try? JSONDecoder().decode(CharacterDataModel.self, from: saveData)
+        UserDefaults.standard.set(jsonData, forKey: "save")
+        
+        
+        
+        
+        
+        
+        
     }
     
     func loadCharacterData() -> [String: Any]? {
-        let fileManager = FileManager.default
-        if let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
-            let fileURL = documentsDirectory.appendingPathComponent("characterData.json")
-            
-            if fileManager.fileExists(atPath: fileURL.path) {
-                do {
-                    let data = try Data(contentsOf: fileURL)
-                    let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
-                    if let characterData = jsonObject as? [String: Any] {
-                        return characterData
+        if(newLifeOrNot == true){
+            let fileManager = FileManager.default
+            if let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
+                let fileURL = documentsDirectory.appendingPathComponent("characterData.json")
+
+                if fileManager.fileExists(atPath: fileURL.path) {
+                    do {
+                        let data = try Data(contentsOf: fileURL)
+                        let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+                        if let characterData = jsonObject as? [String: Any] {
+                            return characterData
+                        }
+                    } catch {
+                        print("Error loading characterData.json: \(error)")
                     }
-                } catch {
-                    print("Error loading characterData.json: \(error)")
                 }
             }
+
+            return nil
+        }else{
+            let storedData = UserDefaults.standard.data(forKey: "save")
+            let decodedDictionary = try? JSONSerialization.jsonObject(with: storedData!, options: []) as? [String: Any]
+            var characterInfo = decodedDictionary?[username] as? [String: Any]
+//            characterInfo?["smarts"] = 10
+            characterInfo?["password"] = nil
+            return characterInfo
         }
         
-        return nil
+        
+        
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -241,6 +304,10 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func handleError(error:Error){
         //错误处理
+    }
+    
+    func saveContent() {
+        print("back to home")
     }
 
     

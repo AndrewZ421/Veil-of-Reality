@@ -21,9 +21,13 @@ class StartScreenController: UIViewController {
     
     var dataModel: StartScreenDataModel!
     
+    var username: String!
+    var password: String!
+    var newLifeOrNot: Bool!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationItem.hidesBackButton = true
         createNewLife()
         
         // Set fullNameLabel
@@ -148,7 +152,9 @@ class StartScreenController: UIViewController {
     
     @IBAction func start(_ sender: Any) {
         let homePageViewController = storyboard?.instantiateViewController(withIdentifier: "HomePageViewController") as! HomePageViewController
-        
+        homePageViewController.username = username
+        homePageViewController.password = password
+        homePageViewController.newLifeOrNot = newLifeOrNot
         navigationController?.pushViewController(homePageViewController, animated: true)
     }
     

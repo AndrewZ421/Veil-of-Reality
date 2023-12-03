@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D4139D42B1C478800AA4839 /* VeilOfRealityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4139D32B1C478800AA4839 /* VeilOfRealityViewController.swift */; };
+		3D4139D62B1C48BA00AA4839 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4139D52B1C48BA00AA4839 /* LogInViewController.swift */; };
+		3D4139D82B1C48D100AA4839 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4139D72B1C48D100AA4839 /* RegisterViewController.swift */; };
 		3D4707CF2B0171DA0080D2AE /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4707CE2B0171DA0080D2AE /* EventViewController.swift */; };
 		3D4707F32B0187430080D2AE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4707F22B0187430080D2AE /* TestViewController.swift */; };
+		3D5F1D612B1BFAA800D154EA /* NewLifeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5F1D602B1BFAA800D154EA /* NewLifeViewController.swift */; };
 		4902F3C02AE384200004CA5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4902F3BF2AE384200004CA5C /* AppDelegate.swift */; };
 		4902F3C22AE384200004CA5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4902F3C12AE384200004CA5C /* SceneDelegate.swift */; };
 		4902F3C72AE384200004CA5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4902F3C52AE384200004CA5C /* Main.storyboard */; };
@@ -34,8 +38,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D4139D32B1C478800AA4839 /* VeilOfRealityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeilOfRealityViewController.swift; sourceTree = "<group>"; };
+		3D4139D52B1C48BA00AA4839 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		3D4139D72B1C48D100AA4839 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		3D4707CE2B0171DA0080D2AE /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		3D4707F22B0187430080D2AE /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		3D5F1D602B1BFAA800D154EA /* NewLifeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLifeViewController.swift; sourceTree = "<group>"; };
 		4902F3BC2AE384200004CA5C /* Veil-of-Reality.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Veil-of-Reality.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4902F3BF2AE384200004CA5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4902F3C12AE384200004CA5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +149,10 @@
 				3D4707CE2B0171DA0080D2AE /* EventViewController.swift */,
 				3D4707F22B0187430080D2AE /* TestViewController.swift */,
 				FB3552712B12A9AB00365582 /* OccupationViewController.swift */,
+				3D5F1D602B1BFAA800D154EA /* NewLifeViewController.swift */,
+				3D4139D32B1C478800AA4839 /* VeilOfRealityViewController.swift */,
+				3D4139D52B1C48BA00AA4839 /* LogInViewController.swift */,
+				3D4139D72B1C48D100AA4839 /* RegisterViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -236,16 +248,19 @@
 			files = (
 				4B790AA02AF763E1005A3F30 /* LifePathPageController.swift in Sources */,
 				4B790A9E2AF760F7005A3F30 /* StartScreenController.swift in Sources */,
+				3D4139D62B1C48BA00AA4839 /* LogInViewController.swift in Sources */,
 				4B790AA42AF7679D005A3F30 /* Choice.swift in Sources */,
 				FB35526F2B12A3B500365582 /* ListCell.swift in Sources */,
 				4B790A982AF75195005A3F30 /* NetworkService.swift in Sources */,
 				4B790A9C2AF76070005A3F30 /* HomePageViewController.swift in Sources */,
+				3D4139D42B1C478800AA4839 /* VeilOfRealityViewController.swift in Sources */,
 				FB31FFDB2B12B72800CE0F2E /* JobView.swift in Sources */,
 				3D4707F32B0187430080D2AE /* TestViewController.swift in Sources */,
 				3D4707CF2B0171DA0080D2AE /* EventViewController.swift in Sources */,
 				FBBCCE4B2B1064D800A11497 /* DeathView.swift in Sources */,
 				4B790A952AF73A76005A3F30 /* Event.swift in Sources */,
 				4B790A9A2AF75F88005A3F30 /* User.swift in Sources */,
+				3D4139D82B1C48D100AA4839 /* RegisterViewController.swift in Sources */,
 				4B790AA22AF76527005A3F30 /* Character.swift in Sources */,
 				49AF8F272AFF464D009E4236 /* CircularProgressBarView.swift in Sources */,
 				FB3552742B12AB5300365582 /* ListInfo.swift in Sources */,
@@ -253,6 +268,7 @@
 				4902F3C02AE384200004CA5C /* AppDelegate.swift in Sources */,
 				FB31FFDD2B12CFB700CE0F2E /* WealthView.swift in Sources */,
 				4902F3C22AE384200004CA5C /* SceneDelegate.swift in Sources */,
+				3D5F1D612B1BFAA800D154EA /* NewLifeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
