@@ -16,6 +16,7 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var avatarImage: UIImageView!
     
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var wealthLabel: UILabel!
     @IBOutlet weak var lifeTableView: UITableView!
     @IBOutlet weak var growBtn: UIButton!
     
@@ -114,7 +115,11 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         smartsBar.additionalText = "Smarts"
         smartsBar.progress = CGFloat(mainCharacter.smarts) / 100
         
-        //set avatar randomly
+        // Set wealthLabel
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        let formattedWealth = numberFormatter.string(from: NSNumber(value: wealth)) ?? ""
+        wealthLabel.text = "$" + formattedWealth
     }
     
     @IBAction func showJobView(_ sender: Any) {

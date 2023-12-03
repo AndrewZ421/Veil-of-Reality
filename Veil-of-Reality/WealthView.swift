@@ -9,7 +9,6 @@ import SwiftUI
 
 struct WealthView: View {
     @State private var showAlert = false
-    @State private var isConditionMet = false
     
     var onItemSelected: (() -> Void)?
     var body: some View {
@@ -57,10 +56,7 @@ struct WealthView: View {
                         saveCharacterData(characterData: updatedCharacterData!)
                     }
                     else {
-                        //检查条件是否满足
-                        if !isConditionMet {
-                            self.showAlert = true
-                        }
+                        self.showAlert = true
                     }
                     onItemSelected?()
                 }){

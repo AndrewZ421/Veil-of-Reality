@@ -273,6 +273,7 @@
                         <outlet property="popularityBar" destination="tbR-8C-w5V" id="QY0-ft-BFc"/>
                         <outlet property="smartsBar" destination="GSd-km-qAX" id="geC-O0-3hk"/>
                         <outlet property="wealthBtn" destination="x4v-bD-T3R" id="V4x-NS-Dci"/>
+                        <outlet property="wealthLabel" destination="oZR-Tb-FiT" id="WHh-BP-mUy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -721,7 +722,6 @@
         <!--Navigation Controller-->
         <scene sceneID="GOB-px-tta">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WbZ-Sd-wX2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dQW-Iz-oYS" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kq1-gf-P51">
@@ -733,6 +733,7 @@
                         <segue destination="jT0-Qj-UtU" kind="relationship" relationship="rootViewController" id="9pd-07-nm0"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WbZ-Sd-wX2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1972" y="-13"/>
         </scene>

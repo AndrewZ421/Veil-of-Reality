@@ -9,8 +9,11 @@ import SwiftUI
 
 struct JobView: View {
     //弹窗相关属性
-    @State private var showAlert = false
-    @State private var isConditionMet = false
+    @State private var showAgeAlert = false
+    @State private var showHealthAlert = false
+    @State private var showHappinessAlert = false
+    @State private var showPopularityAlert = false
+    @State private var showSmartsAlert = false
     
     var onJobSelected: (() -> Void)?
     var body: some View {
@@ -40,17 +43,30 @@ struct JobView: View {
             List(jobData) { job in
                 Button(action: {
                     var characterData = loadCharacterData()
-                    characterData!["job"] = job.name
-                    characterData!["salary"] = Int(job.salary.replacingOccurrences(of: "$", with: "").replacingOccurrences(of: ",", with: ""))
-                    saveCharacterData(characterData: characterData!)
                     print("\(job.name) was tapped")
                     
                     onJobSelected?()
                     //检查条件是否满足
-                    if !isConditionMet {
-                        self.showAlert = true
+                    if (characterData!["age"] as! Int) < job.ageConstrain {
+                        self.showAgeAlert = true
                     }
-                    
+                    else if (characterData!["health"] as! Int) < job.healthConstrain {
+                        self.showHealthAlert = true
+                    }
+                    else if (characterData!["happiness"] as! Int) < job.happinessConstrain {
+                        self.showHappinessAlert = true
+                    }
+                    else if (characterData!["popularity"] as! Int) < job.popularityConstrain {
+                        self.showPopularityAlert = true
+                    }
+                    else if (characterData!["smarts"] as! Int) < job.smartsConstrain {
+                        self.showSmartsAlert = true
+                    }
+                    else {
+                        characterData!["job"] = job.name
+                        characterData!["salary"] = Int(job.salary.replacingOccurrences(of: "$", with: "").replacingOccurrences(of: ",", with: ""))
+                        saveCharacterData(characterData: characterData!)
+                    }
                 })
                 {
                     HStack {
@@ -73,7 +89,27 @@ struct JobView: View {
                 }
                 .padding(.bottom,-3)
                 
-                .alert("Can't get a job", isPresented: $showAlert) {
+                .alert("Can't get this job", isPresented: $showAgeAlert) {
+                    Button("OK", role: .cancel){    }
+                }message: {
+                    Text("You are too young!")
+                }
+                .alert("Can't get this job", isPresented: $showHealthAlert) {
+                    Button("OK", role: .cancel){    }
+                }message: {
+                    Text("You are not healthy enough!")
+                }
+                .alert("Can't get this job", isPresented: $showHappinessAlert) {
+                    Button("OK", role: .cancel){    }
+                }message: {
+                    Text("You are not mentally healthy enough!")
+                }
+                .alert("Can't get this job", isPresented: $showPopularityAlert) {
+                    Button("OK", role: .cancel){    }
+                }message: {
+                    Text("You are not popular enough!")
+                }
+                .alert("Can't get this job", isPresented: $showSmartsAlert) {
                     Button("OK", role: .cancel){    }
                 }message: {
                     Text("You are not smart enough!")
@@ -167,16 +203,21 @@ struct JobData: Identifiable {
     let imageName: String
     let name: String
     let salary: String
+    let ageConstrain: Int
+    let healthConstrain: Int
+    let happinessConstrain: Int
+    let popularityConstrain: Int
+    let smartsConstrain: Int
 }
 
 let jobData = [
-    JobData(imageName: "piano", name: "Pianist", salary: "$45,635"),
-    JobData(imageName: "police", name: "Police", salary: "$41,000"),
-    JobData(imageName: "director", name: "Director", salary: "$47,935"),
-    JobData(imageName: "analyst", name: "Opertations Analyst", salary: "$62,190"),
-    JobData(imageName: "bricklayer", name: "Bricklayer", salary: "$36,890"),
-    JobData(imageName: "teacher", name: "Primary school Teacher", salary: "$50,165"),
-    JobData(imageName: "taxidriver", name: "Taxi Driver", salary: "$38,480")
+    JobData(imageName: "piano", name: "Pianist", salary: "$45,635", ageConstrain: 18, healthConstrain: 20, happinessConstrain: 10, popularityConstrain: 50, smartsConstrain: 50),
+    JobData(imageName: "police", name: "Police", salary: "$41,000", ageConstrain: 22, healthConstrain: 70, happinessConstrain: 20, popularityConstrain: 20, smartsConstrain: 40),
+    JobData(imageName: "director", name: "Director", salary: "$47,935", ageConstrain: 22, healthConstrain: 20, happinessConstrain: 20, popularityConstrain: 50, smartsConstrain: 40),
+    JobData(imageName: "analyst", name: "Opertations Analyst", salary: "$62,190", ageConstrain: 22, healthConstrain: 30, happinessConstrain: 20, popularityConstrain: 20, smartsConstrain: 60),
+    JobData(imageName: "bricklayer", name: "Bricklayer", salary: "$36,890", ageConstrain: 18, healthConstrain: 60, happinessConstrain: 10, popularityConstrain: 10, smartsConstrain: 10),
+    JobData(imageName: "teacher", name: "Primary school Teacher", salary: "$50,165", ageConstrain: 22, healthConstrain: 40, happinessConstrain: 40, popularityConstrain: 30, smartsConstrain: 60),
+    JobData(imageName: "taxidriver", name: "Taxi Driver", salary: "$38,480", ageConstrain: 22, healthConstrain: 40, happinessConstrain: 20, popularityConstrain: 30, smartsConstrain: 30)
     
     
 ]
