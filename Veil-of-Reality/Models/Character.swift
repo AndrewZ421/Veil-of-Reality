@@ -39,8 +39,6 @@ class Character: Decodable {
     var citizenship: String
     var gender: Gender
     var occupation: Occupation
-    var states: States
-    var group: Int
     var motherName: String
     var fatherName: String
     var health: Int
@@ -58,8 +56,6 @@ class Character: Decodable {
         self.gender = gender
         self.occupation = occupation
         let ageGroup = age / 3
-        self.states = States(ageGroup: ageGroup, isMarried: married, occupation: occupation, isStudent: student)
-        self.group = states.calculateGroup()
         self.citizenship = citizenship
         self.motherName = mother
         self.fatherName = father
@@ -73,6 +69,6 @@ class Character: Decodable {
     }
 
     private enum CodingKeys: String, CodingKey {
-        case id, name, age, citizenship, gender, occupation, states, group, motherName = "mother_name", fatherName = "father_name", health, happiness, popularity, smarts, job, salary, wealth
+        case id, name, age, citizenship, gender, occupation, motherName = "mother_name", fatherName = "father_name", health, happiness, popularity, smarts, job, salary, wealth
     }
 }

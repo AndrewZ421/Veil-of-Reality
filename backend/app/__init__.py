@@ -23,7 +23,10 @@ def create_app(config_class=Config):
 
     @app.route('/create_character', methods=['GET'])
     def get_character_route():
-        return Character.create_character()
+        character = Character.create_character()
+        print("What is character: ", character.data)
+        return character
+
 
 
 

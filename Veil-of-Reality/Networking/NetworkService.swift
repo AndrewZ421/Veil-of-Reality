@@ -60,14 +60,17 @@ class NetworkService{
             //check whether we recieved data.
             guard let data = data else {
                 completion(.failure(.unknown))
+                
                 return
             }
             
             do {
                 // 尝试解码JSON到指定的类型
+                
                 let decodedObject = try JSONDecoder().decode(expecting, from: data)
                 completion(.success(decodedObject))
             } catch {
+                print("Object wrong.")
                 completion(.failure(.unknown))
             }
         }

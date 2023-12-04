@@ -28,6 +28,11 @@ app = create_app()
 #     load_country_to_db('./data/country_codes.csv')
 
 def load_event_to_db(filename):
+    print('Clearing existing data')
+    db.session.query(Choice).delete()
+    db.session.query(Event).delete()
+    db.session.commit()
+
     # 打开CSV文件并读取数据
     with open(filename, 'r') as csv_file:
         csv_reader = csv.reader(csv_file)
@@ -50,6 +55,7 @@ def load_event_to_db(filename):
                 db.session.add(choice)
 
         # 提交更改到数据库
+        print('Committing changes to database')
         db.session.commit()
 
 with app.app_context():

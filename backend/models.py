@@ -67,10 +67,13 @@ class Character(db.Model):
             "occupation": self.occupation,
             "mother_name": self.mother_name,
             "father_name": self.father_name,
-            "smart": self.smart,
+            "smarts": self.smart,
             "salary": self.salary,
             "wealth": self.wealth,
-            "job": self.job
+            "job": self.job,
+            "health": random.randint(0, 100),
+            "happiness": random.randint(0, 100),
+            "popularity": random.randint(0, 100),
         }
 
     @staticmethod
@@ -105,7 +108,8 @@ class Character(db.Model):
             mother_name=mother_name,
             father_name=father_name,
             gender=string_gender,
-            occupation="unemployed"
+            occupation="unemployed",
+
         )
 
         # 将新实例添加到数据库会话
