@@ -169,16 +169,46 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         
+//        var saveData: [String: Any] = [:]
+//
+//        var characterDataSave = characterData
+//        characterDataSave["password"] = "1"
+//        saveData["1"] = characterDataSave
+//        print("#########saveData")
+//        print(saveData)
+//        print("#########")
+//        let jsonData = try? JSONSerialization.data(withJSONObject: saveData)
+////        let decodedData = try? JSONDecoder().decode(CharacterDataModel.self, from: saveData)
+//        UserDefaults.standard.set(jsonData, forKey: "save")
+        
+        
+        
         
         let storedData = UserDefaults.standard.data(forKey: "save")
-        let decodedDictionary = try? JSONSerialization.jsonObject(with: storedData!, options: []) as? [String: Any]
+        var decodedDictionary: [String: Any] = [:]
+        if(storedData != nil ){
+            decodedDictionary = try! JSONSerialization.jsonObject(with: storedData!, options: []) as! [String : Any]
+        }
+        
+//        let storedData = UserDefaults.standard.data(forKey: "save")
+//        let decodedDictionary = try? JSONSerialization.jsonObject(with: storedData!, options: []) as? [String: Any]
+        print("#########storedData")
+        print(storedData)
+        print("#########")
+        print("#########decodedDictionary")
+        print(decodedDictionary)
+        print("#########")
+        
+        
+        
+        
         
         var saveData = decodedDictionary
-        
+
         var characterDataSave = characterData
         print(username)
         characterDataSave["password"] = password
-        saveData?[username] = characterDataSave
+        saveData[username] = characterDataSave
         print("#########")
         print(saveData)
         print("#########")

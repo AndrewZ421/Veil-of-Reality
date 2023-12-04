@@ -18,6 +18,20 @@ class VeilOfRealityViewController: UIViewController {
     }
     
     @IBAction func register(_ sender: Any) {
+        
+//        UserDefaults.standard.removeObject(forKey: "save")
+//        if let retrievedValue = UserDefaults.standard.data(forKey: "save"),
+//           let decodedDictionary = try? JSONSerialization.jsonObject(with: retrievedValue, options: []) as? [String: Any]{
+//            print("Retrieved Value: \(decodedDictionary)")
+//        } else {
+//            print("No value found for key 'myKey'")
+//        }
+        
+        
+        
+        
+        
+        
         jumpToRegister()
     }
     @IBAction func logIn(_ sender: Any) {
