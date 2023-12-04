@@ -22,9 +22,7 @@ struct JobView: View {
     var newLifeOrNot: Bool!
 
     var body: some View {
-        
-        
-        
+
         VStack {
             
             ZStack {
@@ -42,6 +40,9 @@ struct JobView: View {
                 Text("Occupation").font(Font.custom("JotiOne-Regular", size: 32))
                     .foregroundColor(.white)
                     .padding(.top, 40)
+            } .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("RefreshData"))) { _ in
+                // Refresh your data here
+              
             }
             
             

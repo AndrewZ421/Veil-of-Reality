@@ -63,7 +63,18 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
         refreshHomePageContent()
+        
+        // Add observer to detect when SwiftUI view is dismissed
+              NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: NSNotification.Name("RefreshData"), object: nil)
     }
+    
+    //12.4
+    // Function to handle refresh
+    @objc func refreshData() {
+           // Refresh your data here
+        
+        nameLabel.text = "  " + mainCharacter.name + ": " + mainCharacter.job
+       }
 
     func refreshHomePageContent() {
         let characterData = loadCharacterData()
@@ -127,6 +138,10 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         
         lifeTableView.reloadData()
     }
+    
+    
+    //   nameLabel.text = "  " + mainCharacter.name + ": " + mainCharacter.job
+    
     
     @IBAction func showJobView(_ sender: Any) {
         var jobView = JobView()
