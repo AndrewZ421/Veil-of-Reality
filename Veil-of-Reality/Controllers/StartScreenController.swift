@@ -27,7 +27,12 @@ class StartScreenController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.hidesBackButton = true
+        self.navigationItem.hidesBackButton = true
+//        newLifeBtn.addTarget(self, action: #selector(createNewLife), for: .touchUpInside)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         createNewLife()
         
         // Set fullNameLabel
@@ -71,9 +76,9 @@ class StartScreenController: UIViewController {
         let lineView2 = UIView(frame: rect2)
         lineView2.backgroundColor = .white
         self.view.addSubview(lineView2)
-        
-//        newLifeBtn.addTarget(self, action: #selector(createNewLife), for: .touchUpInside)
+
     }
+
     
     func updateView(){
         // Set fullNameLabel
@@ -113,12 +118,13 @@ class StartScreenController: UIViewController {
         let motherFirstName = "Test"
         let motherLastName = "mom"
         dataModel = StartScreenDataModel(firstName: firstName, lastName: lastName, gender: gender, nationality: nationality, fatherFirstName: fatherFirstName, fatherLastName: fatherLastName, motherFirstName: motherFirstName, motherLastName: motherLastName)
-        updateView()
         print("Start a new life!")
         
         let characterData = ["firstName": firstName, "lastName": lastName, "gender": gender, "nationality": nationality, "fatherFirstName": fatherFirstName, "fatherLastName": fatherLastName, "motherFirstName": motherFirstName, "motherLastName": motherLastName, "age": 0, "health": 50, "happiness": 50, "popularity": 50, "smarts": 50, "job": "Unempolyed", "salary": 0, "wealth": 100] as [String : Any]
         
         saveCharacterData(characterData: characterData)
+        
+        updateView()
     }
     
     func saveCharacterData(characterData: [String: Any]) {

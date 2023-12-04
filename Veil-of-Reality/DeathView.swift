@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DeathView: View {
+    @State private var navigateToStartScreen = false
     var body: some View {
         
         ZStack {
@@ -38,7 +39,7 @@ struct DeathView: View {
                     .cornerRadius(20)
                 .padding()
                     
-                    Text("You died \nat the age of 18!")
+                    Text("You died!")
                     .font(Font.custom("JotiOne-Regular", size: 32))
                     .fontWeight(.black)
                     .foregroundColor(.white)
@@ -47,9 +48,22 @@ struct DeathView: View {
                     
                 }
                 
-                Image("startbutton").frame(width: 140, height: 88).padding()
+//                Image("startbutton").frame(width: 140, height: 88).padding()
+                Button(action: {
+                    self.navigateToStartScreen = true
+                }) {
+                    Image("startbutton")
+                        .frame(width: 140, height: 88)
+                }
+                .padding()
+
+                NavigationLink(destination: StartScreenControllerWrapper(), isActive: $navigateToStartScreen) {
+                    EmptyView()
+                }
             }
-            
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
+            .edgesIgnoringSafeArea(.all)
             
         }
         

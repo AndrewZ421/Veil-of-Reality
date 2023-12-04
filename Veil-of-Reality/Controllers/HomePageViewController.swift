@@ -35,7 +35,6 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     var dataModel: HomePageDataModel!
     var occupationString: String!
     
-    
 //    struct CharacterDataModel: Codable {
 //        var lastname: String
 //        var gender: String
@@ -120,6 +119,16 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         numberFormatter.numberStyle = .decimal
         let formattedWealth = numberFormatter.string(from: NSNumber(value: wealth)) ?? ""
         wealthLabel.text = "$" + formattedWealth
+        
+        // Check die
+        if doesCharacterDie(character: mainCharacter) {
+            print("Not die")
+            let deathView = DeathView()
+            let hostingController = UIHostingController(rootView: deathView)
+            self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
+            self.navigationController?.pushViewController(hostingController, animated: true)
+        }
     }
     
     @IBAction func showJobView(_ sender: Any) {
@@ -168,7 +177,6 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         }
         
-        
 //        var saveData: [String: Any] = [:]
 //
 //        var characterDataSave = characterData
@@ -180,9 +188,6 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
 //        let jsonData = try? JSONSerialization.data(withJSONObject: saveData)
 ////        let decodedData = try? JSONDecoder().decode(CharacterDataModel.self, from: saveData)
 //        UserDefaults.standard.set(jsonData, forKey: "save")
-        
-        
-        
         
         let storedData = UserDefaults.standard.data(forKey: "save")
         var decodedDictionary: [String: Any] = [:]
@@ -199,10 +204,6 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         print(decodedDictionary)
         print("#########")
         
-        
-        
-        
-        
         var saveData = decodedDictionary
 
         var characterDataSave = characterData
@@ -215,13 +216,18 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         let jsonData = try? JSONSerialization.data(withJSONObject: saveData)
 //        let decodedData = try? JSONDecoder().decode(CharacterDataModel.self, from: saveData)
         UserDefaults.standard.set(jsonData, forKey: "save")
+    }
+    
+    func doesCharacterDie(character: Character) -> Bool {
+        let A = max(0.0005, 0.4 - (Double(character.health) / 100))
+        let b = 0.00001
+        let c = 0.1
         
+        let mortalityRate = A + (b * exp(c * Double(character.age)))
         
-        
-        
-        
-        
-        
+        let randomValue = Double(arc4random_uniform(1000)) / 1000.0
+
+        return randomValue <= mortalityRate
     }
     
     func loadCharacterData() -> [String: Any]? {
@@ -304,10 +310,14 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         
         var characterData = loadCharacterData()
         let salary = characterData!["salary"] as! Int
+        var age = characterData!["age"] as! Int
         var wealth = characterData!["wealth"] as! Int
+        age = age + 1
         wealth = wealth + salary
         characterData!["wealth"] = wealth
+        characterData!["age"] = age
         saveCharacterData(characterData: characterData!)
+        refreshHomePageContent()
         print(characterData)
     }
     
