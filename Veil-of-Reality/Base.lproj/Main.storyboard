@@ -39,7 +39,7 @@
                                     <constraint firstAttribute="height" constant="60" id="6x0-xc-ED4"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="Login"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Try"/>
                                 <connections>
                                     <action selector="logIn:" destination="v8V-ia-QwM" eventType="touchUpInside" id="pIb-la-pV2"/>
                                 </connections>
@@ -50,7 +50,7 @@
                                     <constraint firstAttribute="height" constant="48" id="6Lz-0S-ESj"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="Register"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Resume"/>
                                 <connections>
                                     <action selector="register:" destination="v8V-ia-QwM" eventType="touchUpInside" id="Bmk-Zo-WyD"/>
                                 </connections>
@@ -567,7 +567,7 @@
                                     <constraint firstAttribute="height" constant="60" id="8if-kS-BHf"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="Login"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Try"/>
                                 <connections>
                                     <action selector="startNewLife:" destination="jT0-Qj-UtU" eventType="touchUpInside" id="N0t-xe-gjR"/>
                                 </connections>
@@ -578,7 +578,7 @@
                                     <constraint firstAttribute="height" constant="48" id="Agj-di-H63"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="Register">
+                                <buttonConfiguration key="configuration" style="plain" image="Resume">
                                     <backgroundConfiguration key="background" image="analyst"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -794,8 +794,8 @@
     </scenes>
     <resources>
         <image name="Group 2" width="298" height="93"/>
-        <image name="Login" width="310" height="58"/>
-        <image name="Register" width="310" height="58"/>
+        <image name="Resume" width="310" height="58"/>
+        <image name="Try" width="310" height="58"/>
         <image name="analyst" width="52" height="52"/>
         <image name="avartar4" width="112" height="112"/>
         <image name="baby-bottle" width="500" height="500"/>

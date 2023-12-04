@@ -9,6 +9,7 @@ import SwiftUI
 
 struct JobView: View {
     //弹窗相关属性
+    @State private var showSuccuessAlert = false
     @State private var showAgeAlert = false
     @State private var showHealthAlert = false
     @State private var showHappinessAlert = false
@@ -63,6 +64,8 @@ struct JobView: View {
                         self.showSmartsAlert = true
                     }
                     else {
+                        //结果正确
+                        self.showSuccuessAlert = true
                         characterData!["job"] = job.name
                         characterData!["salary"] = Int(job.salary.replacingOccurrences(of: "$", with: "").replacingOccurrences(of: ",", with: ""))
                         saveCharacterData(characterData: characterData!)
@@ -113,6 +116,12 @@ struct JobView: View {
                     Button("OK", role: .cancel){    }
                 }message: {
                     Text("You are not smart enough!")
+                }
+                
+                .alert("Change Job Successful", isPresented:$showSuccuessAlert ) {
+                    Button("OK", role: .cancel) {   }
+                } message: {
+                    Text("You change your job successful!")
                 }
                         
                     

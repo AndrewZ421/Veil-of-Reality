@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct WealthView: View {
+    @State private var showSuccuessAlert = false
     @State private var showAlert = false
     
     var onItemSelected: (() -> Void)?
@@ -43,14 +44,15 @@ struct WealthView: View {
                     let wealth = characterData!["wealth"] as! Int
 
                     if wealth >= cost {
+                        self.showSuccuessAlert = true
                         var updatedCharacterData = characterData // Create a mutable copy
 
                         // Update the values
                         updatedCharacterData!["wealth"] = wealth - cost
-                        updatedCharacterData!["health"] = min(100, max(health + item.changes[0], 0))
-                        updatedCharacterData!["happiness"] = min(100, max(happiness + item.changes[1], 0))
-                        updatedCharacterData!["popularity"] = min(100, max(popularity + item.changes[2], 0))
-                        updatedCharacterData!["smarts"] = min(100, max(smarts + item.changes[3], 0))
+                        updatedCharacterData!["health"] = health + item.changes[0]
+                        updatedCharacterData!["happiness"] = happiness + item.changes[1]
+                        updatedCharacterData!["popularity"] = popularity + item.changes[2]
+                        updatedCharacterData!["smarts"] = smarts + item.changes[3]
 
                         // Save the updated character data
                         saveCharacterData(characterData: updatedCharacterData!)
@@ -80,6 +82,11 @@ struct WealthView: View {
                         Button("OK", role: .cancel){    }
                     }message: {
                         Text("You don't have enough money!")
+                    }
+                    .alert("Successful Purchase",isPresented: $showSuccuessAlert) {
+                        Button("OK", role: .cancel){    }
+                    }message: {
+                        Text("Purchase Successfully")
                     }
                 }
                 
