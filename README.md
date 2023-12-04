@@ -25,7 +25,7 @@ To get the backend up and running, follow these steps:
 
 1. **Install Flask and Related Packages**: Make sure you have Flask and other required packages installed. You can install them using pip:
    ```bash
-   pip install flask flask_sqlalchemy ...
+   pip install flask flask_sqlalchemy 
    ```
 
 2. **Configure Database URI**: In `init.py`, update the database URI to point to your local MySQL instance.
@@ -55,7 +55,3 @@ Alternatively, see the GitHub documentation on [creating a pull request](https:/
 
 ## Contact
 If you want to contact us, you can reach us at [943926227@qq.com].
-
----
-
-This structure provides a comprehensive overview of your project, including setup instructions and how to contribute. Feel free to adjust the content to better fit your project's needs.
