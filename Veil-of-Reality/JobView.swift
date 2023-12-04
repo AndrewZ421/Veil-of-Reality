@@ -17,6 +17,10 @@ struct JobView: View {
     @State private var showSmartsAlert = false
     
     var onJobSelected: (() -> Void)?
+    var username: String!
+    var password: String!
+    var newLifeOrNot: Bool!
+
     var body: some View {
         
         
@@ -43,32 +47,77 @@ struct JobView: View {
             
             List(jobData) { job in
                 Button(action: {
-                    var characterData = loadCharacterData()
+                    
+                    var characterData: [String: Any] = [:]
+                    if(newLifeOrNot == true){
+                        characterData = loadCharacterData()!
+                    }else{
+                        let storedData = UserDefaults.standard.data(forKey: "save")
+                        let decodedDictionary = try? JSONSerialization.jsonObject(with: storedData!, options: []) as? [String: Any]
+                        var characterInfo = decodedDictionary?[username] as? [String: Any]
+            //            characterInfo?["smarts"] = 10
+                        characterInfo?["password"] = nil
+                        characterData = characterInfo!
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     print("\(job.name) was tapped")
                     
                     onJobSelected?()
                     //检查条件是否满足
-                    if (characterData!["age"] as! Int) < job.ageConstrain {
+                    if (characterData["age"] as! Int) < job.ageConstrain {
                         self.showAgeAlert = true
                     }
-                    else if (characterData!["health"] as! Int) < job.healthConstrain {
+                    else if (characterData["health"] as! Int) < job.healthConstrain {
                         self.showHealthAlert = true
                     }
-                    else if (characterData!["happiness"] as! Int) < job.happinessConstrain {
+                    else if (characterData["happiness"] as! Int) < job.happinessConstrain {
                         self.showHappinessAlert = true
                     }
-                    else if (characterData!["popularity"] as! Int) < job.popularityConstrain {
+                    else if (characterData["popularity"] as! Int) < job.popularityConstrain {
                         self.showPopularityAlert = true
                     }
-                    else if (characterData!["smarts"] as! Int) < job.smartsConstrain {
+                    else if (characterData["smarts"] as! Int) < job.smartsConstrain {
                         self.showSmartsAlert = true
                     }
                     else {
                         //结果正确
                         self.showSuccuessAlert = true
-                        characterData!["job"] = job.name
-                        characterData!["salary"] = Int(job.salary.replacingOccurrences(of: "$", with: "").replacingOccurrences(of: ",", with: ""))
-                        saveCharacterData(characterData: characterData!)
+                        characterData["job"] = job.name
+                        characterData["salary"] = Int(job.salary.replacingOccurrences(of: "$", with: "").replacingOccurrences(of: ",", with: ""))
+                        saveCharacterData(characterData: characterData)
+                        let storedData = UserDefaults.standard.data(forKey: "save")
+                        var decodedDictionary: [String: Any] = [:]
+                        if(storedData != nil ){
+                            decodedDictionary = try! JSONSerialization.jsonObject(with: storedData!, options: []) as! [String : Any]
+                        }
+                        
+                    //        let storedData = UserDefaults.standard.data(forKey: "save")
+                    //        let decodedDictionary = try? JSONSerialization.jsonObject(with: storedData!, options: []) as? [String: Any]
+                        print("#########storedData")
+                        print(storedData)
+                        print("#########")
+                        print("#########decodedDictionary")
+                        print(decodedDictionary)
+                        print("#########")
+                        
+                        var saveData = decodedDictionary
+
+                        var characterDataSave = characterData
+                        print(username)
+                        characterDataSave["password"] = password
+                        saveData[username] = characterDataSave
+                        print("#########")
+                        print(saveData)
+                        print("#########")
+                        let jsonData = try? JSONSerialization.data(withJSONObject: saveData)
+                    //        let decodedData = try? JSONDecoder().decode(CharacterDataModel.self, from: saveData)
+                        UserDefaults.standard.set(jsonData, forKey: "save")
                     }
                 })
                 {
@@ -147,7 +196,6 @@ struct JobView: View {
         
         
     }
-    
 
 func saveCharacterData(characterData: [String: Any]) {
     let fileManager = FileManager.default
@@ -176,9 +224,16 @@ func saveCharacterData(characterData: [String: Any]) {
             print("Error saving characterData.json: \(error)")
         }
     }
+    
+    
+    
+    
+    
+    
 }
 
 func loadCharacterData() -> [String: Any]? {
+    
     let fileManager = FileManager.default
     if let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
         let fileURL = documentsDirectory.appendingPathComponent("characterData.json")
