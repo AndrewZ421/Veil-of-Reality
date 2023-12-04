@@ -133,6 +133,9 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBAction func showJobView(_ sender: Any) {
         var jobView = JobView()
+        jobView.username = username
+        jobView.password = password
+        jobView.newLifeOrNot = newLifeOrNot
         jobView.onJobSelected = {
             self.refreshHomePageContent()
         }
@@ -142,6 +145,9 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBAction func showWealthView(_ sender: Any) {
         var wealthView = WealthView()
+        wealthView.username = username
+        wealthView.password = password
+        wealthView.newLifeOrNot = newLifeOrNot
         wealthView.onItemSelected = {
             self.refreshHomePageContent()
         }

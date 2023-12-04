@@ -12,6 +12,9 @@ struct WealthView: View {
     @State private var showAlert = false
     
     var onItemSelected: (() -> Void)?
+    var username: String!
+    var password: String!
+    var newLifeOrNot: Bool!
     var body: some View {
         VStack {
             
@@ -36,26 +39,67 @@ struct WealthView: View {
                 Button(action: {
                     print("\(item.name) was tapped")
                     let cost = Int(item.cost.replacingOccurrences(of: "$", with: "").replacingOccurrences(of: ",", with: ""))!
-                    let characterData = loadCharacterData()
-                    let health = characterData!["health"] as! Int
-                    let happiness = characterData!["happiness"] as! Int
-                    let popularity = characterData!["popularity"] as! Int
-                    let smarts = characterData!["smarts"] as! Int
-                    let wealth = characterData!["wealth"] as! Int
+                    var characterData: [String: Any] = [:]
+                    if(newLifeOrNot == true){
+                        characterData = loadCharacterData()!
+                    }else{
+                        let storedData = UserDefaults.standard.data(forKey: "save")
+                        let decodedDictionary = try? JSONSerialization.jsonObject(with: storedData!, options: []) as? [String: Any]
+                        var characterInfo = decodedDictionary?[username] as? [String: Any]
+            //            characterInfo?["smarts"] = 10
+                        characterInfo?["password"] = nil
+                        characterData = characterInfo!
+                    }
+                    
+                    
+                    
+                    let health = characterData["health"] as! Int
+                    let happiness = characterData["happiness"] as! Int
+                    let popularity = characterData["popularity"] as! Int
+                    let smarts = characterData["smarts"] as! Int
+                    let wealth = characterData["wealth"] as! Int
 
                     if wealth >= cost {
                         self.showSuccuessAlert = true
                         var updatedCharacterData = characterData // Create a mutable copy
 
                         // Update the values
-                        updatedCharacterData!["wealth"] = wealth - cost
-                        updatedCharacterData!["health"] = health + item.changes[0]
-                        updatedCharacterData!["happiness"] = happiness + item.changes[1]
-                        updatedCharacterData!["popularity"] = popularity + item.changes[2]
-                        updatedCharacterData!["smarts"] = smarts + item.changes[3]
+                        updatedCharacterData["wealth"] = wealth - cost
+                        updatedCharacterData["health"] = health + item.changes[0]
+                        updatedCharacterData["happiness"] = happiness + item.changes[1]
+                        updatedCharacterData["popularity"] = popularity + item.changes[2]
+                        updatedCharacterData["smarts"] = smarts + item.changes[3]
 
                         // Save the updated character data
-                        saveCharacterData(characterData: updatedCharacterData!)
+                        print(updatedCharacterData["wealth"])
+                        saveCharacterData(characterData: updatedCharacterData)
+                        let storedData = UserDefaults.standard.data(forKey: "save")
+                        var decodedDictionary: [String: Any] = [:]
+                        if(storedData != nil ){
+                            decodedDictionary = try! JSONSerialization.jsonObject(with: storedData!, options: []) as! [String : Any]
+                        }
+                        
+                    //        let storedData = UserDefaults.standard.data(forKey: "save")
+                    //        let decodedDictionary = try? JSONSerialization.jsonObject(with: storedData!, options: []) as? [String: Any]
+                        print("#########storedData")
+                        print(storedData)
+                        print("#########")
+                        print("#########decodedDictionary")
+                        print(decodedDictionary)
+                        print("#########")
+                        
+                        var saveData = decodedDictionary
+
+                        var characterDataSave = updatedCharacterData
+                        print(username)
+                        characterDataSave["password"] = password
+                        saveData[username] = characterDataSave
+                        print("#########")
+                        print(saveData)
+                        print("#########")
+                        let jsonData = try? JSONSerialization.data(withJSONObject: saveData)
+                    //        let decodedData = try? JSONDecoder().decode(CharacterDataModel.self, from: saveData)
+                        UserDefaults.standard.set(jsonData, forKey: "save")
                     }
                     else {
                         self.showAlert = true
@@ -87,6 +131,7 @@ struct WealthView: View {
                         Button("OK", role: .cancel){    }
                     }message: {
                         Text("Purchase Successfully")
+                        
                     }
                 }
                 
