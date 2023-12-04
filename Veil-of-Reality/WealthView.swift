@@ -64,11 +64,11 @@ struct WealthView: View {
                         var updatedCharacterData = characterData // Create a mutable copy
 
                         // Update the values
-                        updatedCharacterData!["wealth"] = wealth - cost
-                        updatedCharacterData!["health"] = min(100, max(health + item.changes[0], 0))
-                        updatedCharacterData!["happiness"] = min(100, max(happiness + item.changes[1], 0))
-                        updatedCharacterData!["popularity"] = min(100, max(popularity + item.changes[2], 0))
-                        updatedCharacterData!["smarts"] = min(100, max(smarts + item.changes[3], 0))
+                        updatedCharacterData["wealth"] = wealth - cost
+                        updatedCharacterData["health"] = min(100, max(health + item.changes[0], 0))
+                        updatedCharacterData["happiness"] = min(100, max(happiness + item.changes[1], 0))
+                        updatedCharacterData["popularity"] = min(100, max(popularity + item.changes[2], 0))
+                        updatedCharacterData["smarts"] = min(100, max(smarts + item.changes[3], 0))
 
                         // Save the updated character data
                         print(updatedCharacterData["wealth"])
