@@ -28,7 +28,7 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var popularityBar: CircularProgressBarView!
     @IBOutlet weak var smartsBar: CircularProgressBarView!
     
-    var lifeArray: Array<String> = ["0 years old", "Borned!", "", "1 years old", "Can walk", ""]
+    var lifeArray: Array<String> = [""]
     
     var mainCharacter = Character(id: 1, name: "Test man", age: 0, gender: Gender.male, occupation: Occupation.employed, married: false, student: false, citizenship: "United States", mother: "father man", father: "mother woman", health: 50, happiness: 50, popularity: 50, smarts: 50, job: "Unemployed", salary: 0, wealth: 0)
     
@@ -105,12 +105,10 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         happinessBar.progress = CGFloat(mainCharacter.happiness) / 100
         
         // Set popularityBar
-       
         popularityBar.additionalText = "Popularity"
         popularityBar.progress = CGFloat(mainCharacter.popularity) / 100
         
         // Set smartsBar
-        
         smartsBar.additionalText = "Smarts"
         smartsBar.progress = CGFloat(mainCharacter.smarts) / 100
         
@@ -120,9 +118,12 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         let formattedWealth = numberFormatter.string(from: NSNumber(value: wealth)) ?? ""
         wealthLabel.text = "$" + formattedWealth
         
+        // Set lifePath
+        lifeArray = characterData!["path"] as! Array<String>
+        print(lifeArray)
+        
         // Check die
         if doesCharacterDie(character: mainCharacter) {
-            print("Not die")
             let deathView = DeathView()
             let hostingController = UIHostingController(rootView: deathView)
             self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -290,8 +291,18 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         
 //        let eventViewController = self.storyboard?.instantiateViewController(withIdentifier: "EventViewController") as! EventViewController
 //        self.navigationController?.pushViewController(eventViewController, animated: true)
-//        
-//        
+//
+        
+        var characterData = loadCharacterData()
+        let salary = characterData!["salary"] as! Int
+        var age = characterData!["age"] as! Int
+        var wealth = characterData!["wealth"] as! Int
+        age = age + 1
+        wealth = wealth + salary
+        characterData!["wealth"] = wealth
+        characterData!["age"] = age
+        saveCharacterData(characterData: characterData!)
+        
         let url = URL(string: "http://127.0.0.1:5000")
         
 //         The 'fetch' function is called with the expected type of `[Event].self`
@@ -307,18 +318,7 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
         }
-        
-        var characterData = loadCharacterData()
-        let salary = characterData!["salary"] as! Int
-        var age = characterData!["age"] as! Int
-        var wealth = characterData!["wealth"] as! Int
-        age = age + 1
-        wealth = wealth + salary
-        characterData!["wealth"] = wealth
-        characterData!["age"] = age
-        saveCharacterData(characterData: characterData!)
         refreshHomePageContent()
-        print(characterData)
     }
     
     func sendChoice(choice: Choice){

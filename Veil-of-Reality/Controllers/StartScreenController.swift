@@ -120,7 +120,7 @@ class StartScreenController: UIViewController {
         dataModel = StartScreenDataModel(firstName: firstName, lastName: lastName, gender: gender, nationality: nationality, fatherFirstName: fatherFirstName, fatherLastName: fatherLastName, motherFirstName: motherFirstName, motherLastName: motherLastName)
         print("Start a new life!")
         
-        let characterData = ["firstName": firstName, "lastName": lastName, "gender": gender, "nationality": nationality, "fatherFirstName": fatherFirstName, "fatherLastName": fatherLastName, "motherFirstName": motherFirstName, "motherLastName": motherLastName, "age": 0, "health": 50, "happiness": 50, "popularity": 50, "smarts": 50, "job": "Unempolyed", "salary": 0, "wealth": 100] as [String : Any]
+        let characterData = ["firstName": firstName, "lastName": lastName, "gender": gender, "nationality": nationality, "fatherFirstName": fatherFirstName, "fatherLastName": fatherLastName, "motherFirstName": motherFirstName, "motherLastName": motherLastName, "age": 0, "health": 50, "happiness": 50, "popularity": 50, "smarts": 50, "job": "Unempolyed", "salary": 0, "wealth": 100, "path": ["0 years old", "Borned!"]] as [String : Any]
         
         saveCharacterData(characterData: characterData)
         
