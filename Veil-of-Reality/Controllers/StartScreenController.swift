@@ -109,22 +109,56 @@ class StartScreenController: UIViewController {
     }
     
     @IBAction func createNewLife() {
-        let firstName = "Test"
-        let lastName = "son"
-        let gender = "male"
-        let nationality = "United States"
-        let fatherFirstName = "Test"
-        let fatherLastName = "dad"
-        let motherFirstName = "Test"
-        let motherLastName = "mom"
-        dataModel = StartScreenDataModel(firstName: firstName, lastName: lastName, gender: gender, nationality: nationality, fatherFirstName: fatherFirstName, fatherLastName: fatherLastName, motherFirstName: motherFirstName, motherLastName: motherLastName)
+        var firstName = "Test"
+        var lastName = "son"
+        var gender = "male"
+        var nationality = "United States"
+        var fatherFirstName = "Test"
+        var fatherLastName = "dad"
+        var motherFirstName = "Test"
+        var motherLastName = "mom"
+
         print("Start a new life!")
         
-        let characterData = ["firstName": firstName, "lastName": lastName, "gender": gender, "nationality": nationality, "fatherFirstName": fatherFirstName, "fatherLastName": fatherLastName, "motherFirstName": motherFirstName, "motherLastName": motherLastName, "age": 0, "health": 50, "happiness": 50, "popularity": 50, "smarts": 50, "job": "Unempolyed", "salary": 0, "wealth": 100, "path": ["0 years old", "Borned!"]] as [String : Any]
+        let url = URL(string: "http://127.0.0.1:5000/create_character")
         
-        saveCharacterData(characterData: characterData)
+        NetworkService.shared.fetch(url: url, expecting: Character.self) { result in
+            DispatchQueue.main.async {
+                switch result {
+                    case .success(let character):  // 在这里添加 'let event'
+                        // The event was successfully fetched from the server
+                    var sonName = character.name.split(separator: " ")
+                    firstName = String(sonName[0])
+                    lastName = ""
+                    gender = character.gender.rawValue
+                    
+                    
+                    nationality = character.citizenship
+                    fatherFirstName = character.fatherName
+                    fatherLastName = ""
+                    motherFirstName = character.motherName
+                    motherLastName = ""
+                    self.dataModel = StartScreenDataModel(firstName: firstName, lastName: lastName, gender: gender, nationality: nationality, fatherFirstName: fatherFirstName, fatherLastName: fatherLastName, motherFirstName: motherFirstName, motherLastName: motherLastName)
+                    let characterData = ["firstName": firstName, "lastName": lastName, "gender": gender, "nationality": nationality, "fatherFirstName": fatherFirstName, "fatherLastName": fatherLastName, "motherFirstName": motherFirstName, "motherLastName": motherLastName, "age": 0, "health": Int(arc4random_uniform(91)) + 10, "happiness": Int(arc4random_uniform(91)) + 10, "popularity": Int(arc4random_uniform(91)) + 10, "smarts": Int(arc4random_uniform(91)) + 10, "job": "Unempolyed", "salary": 0, "wealth": Int(arc4random_uniform(91)) + 10, "path": ["0 years old", "Borned!",""]] as [String : Any]
+                    print("We here")
+                    print(fatherFirstName)
+                    self.saveCharacterData(characterData: characterData)
+
+                    self.updateView()
+                    case .failure(_):
+                        // Handle the error scenario
+                    print("Error")
+                        
+                }
+            }
+        }
+        dataModel = StartScreenDataModel(firstName: firstName, lastName: lastName, gender: gender, nationality: nationality, fatherFirstName: fatherFirstName, fatherLastName: fatherLastName, motherFirstName: motherFirstName, motherLastName: motherLastName)
+
+        print(dataModel)
+
         
         updateView()
+        
     }
     
     func saveCharacterData(characterData: [String: Any]) {

@@ -27,7 +27,7 @@ class EventViewController: UIViewController {
         navigationItem.hidesBackButton = true
         
         let url = URL(string: "http://127.0.0.1:5000/get_event")
-        print("Here")
+        
         NetworkService.shared.fetch(url: url, expecting: Event.self) { result in
             DispatchQueue.main.async {
                 switch result {
@@ -55,7 +55,6 @@ class EventViewController: UIViewController {
         if let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
             let fileURL = documentsDirectory.appendingPathComponent("characterData.json")
             
-            print(fileURL)
             
             // Delete old file if exists
             if fileManager.fileExists(atPath: fileURL.path) {
@@ -103,25 +102,28 @@ class EventViewController: UIViewController {
 //        choice.id = event.choices[0].id
 //        choice.description = event.choices[0].description
 //        sendChoice()
-        jumpToHome()
+        
+        updateParameters()
+
+
     }
     @IBAction func button2(_ sender: Any) {
 //        choice.id = event.choices[1].id
 //        choice.description = event.choices[1].description
 //        sendChoice()
-        jumpToHome()
+        updateParameters()
     }
     @IBAction func button3(_ sender: Any) {
 //        choice.id = event.choices[2].id
 //        choice.description = event.choices[2].description
 //        sendChoice()
-        jumpToHome()
+        updateParameters()
     }
     @IBAction func button4(_ sender: Any) {
 //        choice.id = event.choices[3].id
 //        choice.description = event.choices[3].description
 //        sendChoice()
-        jumpToHome()
+        updateParameters()
     }
     
     
@@ -135,6 +137,29 @@ class EventViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    func updateParameters(){
+        var characterData = loadCharacterData()
+        var health = characterData!["health"] as! Int
+        var happiness = characterData!["happiness"] as! Int
+        var popularity = characterData!["popularity"] as! Int
+        var smarts = characterData!["smarts"] as! Int
+
+        // 添加随机数
+        health += Int.random(in: -3...3)
+        happiness += Int.random(in: -3...3)
+        popularity += Int.random(in: -3...3)
+        smarts += Int.random(in: -3...3)
+
+        // 更新 characterData
+        characterData!["health"] =  min(100,max(health,0))
+        characterData!["happiness"] = min(100,max(happiness,0))
+        characterData!["popularity"] = min(100,max(popularity,0))
+        characterData!["smarts"] = min(100,max(smarts,0))
+
+        saveCharacterData(characterData: characterData!)
+        jumpToHome()
+    }
+    
     func sendChoice(){
         
         let url = URL(string: "http://127.0.0.1:5000")
@@ -180,9 +205,9 @@ class EventViewController: UIViewController {
         var characterData = loadCharacterData()
         var lifePath = characterData!["path"] as! Array<String>
         var age = characterData!["age"] as! Int
-        lifePath.append("")
         lifePath.append(String(age)+" years old")
         lifePath.append(event.description)
+        lifePath.append("")
         characterData!["path"] = lifePath
         saveCharacterData(characterData: characterData!)
         print(event.self)

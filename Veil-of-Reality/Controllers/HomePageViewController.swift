@@ -122,14 +122,10 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         lifeArray = characterData!["path"] as! Array<String>
         print(lifeArray)
         
-        // Check die
-        if doesCharacterDie(character: mainCharacter) {
-            let deathView = DeathView()
-            let hostingController = UIHostingController(rootView: deathView)
-            self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
-            self.navigationController?.pushViewController(hostingController, animated: true)
-        }
+
+        
+        lifeTableView.reloadData()
     }
     
     @IBAction func showJobView(_ sender: Any) {
@@ -227,7 +223,7 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func doesCharacterDie(character: Character) -> Bool {
         let A = max(0.0005, 0.4 - (Double(character.health) / 100))
-        let b = 0.00001
+        let b = 0.1
         let c = 0.1
         
         let mortalityRate = A + (b * exp(c * Double(character.age)))
@@ -308,23 +304,15 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         characterData!["wealth"] = wealth
         characterData!["age"] = age
         saveCharacterData(characterData: characterData!)
-        
-        let url = URL(string: "http://127.0.0.1:5000")
-        
-//         The 'fetch' function is called with the expected type of `[Event].self`
-        NetworkService.shared.fetch(url: url, expecting: Event.self) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let events):
-                    // Handle the successful retrieval of events
-                    self.handleEventsForCharacter(character: self.mainCharacter, event: events)
-                case .failure(let error):
-                    // Handle the error scenario
-                    self.handleError(error:error)
-                }
-            }
+        if doesCharacterDie(character: mainCharacter) {
+            let deathView = DeathView()
+            let hostingController = UIHostingController(rootView: deathView)
+            self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
+            self.navigationController?.pushViewController(hostingController, animated: true)
         }
-        refreshHomePageContent()
+        else
+        {refreshHomePageContent()}
     }
     
     func sendChoice(choice: Choice){
