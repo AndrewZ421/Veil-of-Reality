@@ -177,6 +177,14 @@ class EventViewController: UIViewController {
         choice2.setTitle(event.choices[1].description, for: .normal)
         choice3.setTitle(event.choices[2].description, for: .normal)
         choice4.setTitle(event.choices[3].description, for: .normal)
+        var characterData = loadCharacterData()
+        var lifePath = characterData!["path"] as! Array<String>
+        var age = characterData!["age"] as! Int
+        lifePath.append("")
+        lifePath.append(String(age)+" years old")
+        lifePath.append(event.description)
+        characterData!["path"] = lifePath
+        saveCharacterData(characterData: characterData!)
         print(event.self)
     }
 
